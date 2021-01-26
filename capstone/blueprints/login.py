@@ -41,6 +41,11 @@ def login():
     return render_template('login/login.html', form=login_form)
 
 
+@login_bp.route('/session')
+def show_session():
+    return dict(session)
+
+
 @login_bp.route('/logout')
 def logout():
 
