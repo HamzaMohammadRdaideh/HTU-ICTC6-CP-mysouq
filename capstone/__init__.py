@@ -30,6 +30,9 @@ def create_app(test_config=None):
     from .blueprints.signup import signup_bp
     app.register_blueprint(signup_bp)
 
+    # register the 'user' blueprint
+    from .blueprints.home import home_bp
+    app.register_blueprint(home_bp)
 
     return app
 

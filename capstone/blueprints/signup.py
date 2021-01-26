@@ -23,11 +23,11 @@ def signup():
         user.username = signup_form.username.data
         user.password = user.encrypt_password(signup_form.password.data)
         user.email = signup_form.email.data
-        user.brithday = signup_form.brithday.data
+        user.brithday = signup_form.birthday.data
 
         # save the user object
         user.save()
 
-        return redirect(url_for("capstone.login"))
+        return redirect(url_for("login.login"))
 
-    return render_template("capstone/signup.html" , form = signup_form)    
+    return render_template("sign-up/sign-up.html" , form = signup_form)    

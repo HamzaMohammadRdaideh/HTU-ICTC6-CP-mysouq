@@ -7,7 +7,7 @@ from capstone.models import User
 # define our blueprint
 login_bp = Blueprint('login', __name__)
 
-
+@login_bp.route("/" , methods = ['POST' , 'GET'])
 @login_bp.route('/login', methods=['POST', 'GET'])
 def login():
 
@@ -28,7 +28,7 @@ def login():
             session['user'] = user.serialize()
 
             # redirect the user after login
-            return redirect(url_for('post.index'))
+            return redirect(url_for('home.home'))
         else:
             # invalid credentials, redirect to login with error message
             flash("Login invalid. Please check your username and password.")
