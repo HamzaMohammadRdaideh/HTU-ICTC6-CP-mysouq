@@ -2,6 +2,7 @@ from mongoengine import *
 from datetime import datetime
 from .item import Item
 from passlib.hash import pbkdf2_sha256
+from bson import ObjectId
 
 class User(Document):
 
@@ -32,5 +33,17 @@ class User(Document):
 
 
 
+    # this method serializes the object into a JSON object
+    def serialize(self):
+        serialized = {
+            "id": str(self.pk),
+            'username': self.username,
+            'password': 'nice try :)!',
+            'role': self.role,
+            'email': self.email,
+            'favorite': self.favorite,
+            'disable': self.disable
+        }
 
+        return serialized
 

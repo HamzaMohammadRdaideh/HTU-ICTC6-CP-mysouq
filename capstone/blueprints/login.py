@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, flash
+from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, PasswordField
 from blog.forms import LoginForm
@@ -11,8 +11,10 @@ login_bp = Blueprint('login', __name__)
 @login_bp.route('/login', methods=['POST', 'GET'])
 def login():
 
+    # created an instance of our form
     login_form = LoginForm()
 
+    # check if it is a form submission
     if login_form.validate_on_submit():
 
         # read values from the login wtform
@@ -21,14 +23,17 @@ def login():
 
         user = User.objects(username=username).first()
 
-        # if user  != None:
         # check if credentials are valid
-        if user and user.authenticate(username, password) :
-            # store the user ID in the session
-            session['uid'] = str(user.id)
-            session['username'] = user.username
-            session['email'] = user.email
-            session['role'] = user.role
+        if (user) and (user.authenticate(username, password)):
+            session['user'] = user.serialize()
+
+            # redirect the user after login
+            return redirect(url_for('post.index'))
+        else:
+            # invalid credentials, redirect to login with error message
+            flash("Login invalid. Please check your username and password.")
+            return redirect(url_for('login.login'))
+
 
         return redirect("/profile")
 
@@ -38,6 +43,7 @@ def login():
 
 @login_bp.route('/logout')
 def logout():
+
     # pop 'uid' from session
     session.clear()
 
