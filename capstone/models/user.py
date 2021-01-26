@@ -22,7 +22,7 @@ class User(Document):
     def authenticate(self, username, password):
         # username / password -> from the login form
         # self.username / self.password -> from the database
-        if username == self.username and password == self.password:
+        if username == self.username and pbkdf2_sha256.verify(password, self.password):
             return True
         else:
             return False
