@@ -1,6 +1,6 @@
 from mongoengine import *
 from datetime import datetime
-from . request import BuyRequest 
+# from . request import BuyRequest 
 
 
 class Item(Document):

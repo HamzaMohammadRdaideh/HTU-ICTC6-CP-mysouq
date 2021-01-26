@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, PasswordField
-from blog.forms import LoginForm
-from blog.models import User
+from capstone.forms import LoginForm
+from capstone.models import User
 
 # define our blueprint
 login_bp = Blueprint('login', __name__)

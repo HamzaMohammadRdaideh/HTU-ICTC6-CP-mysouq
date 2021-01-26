@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, validators ,PasswordField ,TextAreaField ,EmailField ,DateTimeField
+from wtforms import StringField, SubmitField, validators ,PasswordField ,TextAreaField ,DateTimeField
+from wtforms.fields.html5 import EmailField
 
 # Sign Up Account Settings Forms
 class SignUpForm(FlaskForm):
