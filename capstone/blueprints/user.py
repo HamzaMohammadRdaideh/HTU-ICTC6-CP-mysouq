@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for 
 from flask_wtf import FlaskForm
-from capstone.models import User
+from capstone.models import User , Item
 from capstone.forms.edit_profile import EditProfileForm  , ChangePasswordForm
+from capstone.forms.add_item import AddItemForm
 from bson import ObjectId
 
 # define our blueprint
@@ -63,3 +64,24 @@ def change_password():
 
 
 
+@user_bp.route('/user/add_item', methods=['GET', 'POST'])
+def add_item():
+
+    add_item_form = AddItemForm()
+
+    if add_item_form.validate_on_submit():
+
+        title = add_item_form.title.data
+        description = add_item_form.description.data
+        price = add_item_form.price.data
+        category = add_item_form.category.data
+
+        new_item = Item(title = title, description = description, price = price, category = category)
+        
+        new_item.save()
+
+        flash("Your item has been successfully added.")
+
+        return redirect(url_for('home.home'))
+
+    return render_template("item/add_item.html", form = add_item_form)
