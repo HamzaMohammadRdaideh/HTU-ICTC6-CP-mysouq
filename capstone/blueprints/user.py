@@ -11,23 +11,22 @@ user_bp = Blueprint('user', __name__)
 @user_bp.route('/user/edit_profile', methods=['POST', 'GET'])
 def edit_profile_user():
 
+    user = User.objects(id = session["user"]['id']).first()
+
     edit_profile_form = EditProfileForm()
     
-    # if request.method == "GET":
+    if request.method == "GET":
 
-    # #set values in the form
+    #set values in the form
         
-    #     edit_profile_form.first_name.data = session['first_name']
-    #     edit_profile_form.last_name.data = session['last_name']
+        edit_profile_form.new_first_name.data = session['user']['first_name']
+        edit_profile_form.new_last_name.data = session['user']['last_name']
 
     if  edit_profile_form.validate_on_submit():
 
         new_first_name = edit_profile_form.new_first_name.data
         new_last_name = edit_profile_form.new_last_name.data
-        
-
-        user = User.objects(id = session["user"]['id']).first()
- 
+    
         user.first_name = new_first_name
         user.last_name = new_last_name
         
@@ -43,6 +42,7 @@ def edit_profile_user():
 
 @user_bp.route('/user/change_password', methods=['GET', 'POST'])
 def change_password():
+
     user = User.objects(id=session['user']['id']).first()
 
     change_password_form = ChangePasswordForm()

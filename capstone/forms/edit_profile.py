@@ -11,9 +11,7 @@ class EditProfileForm(FlaskForm):
 
 
 class ChangePasswordForm(FlaskForm):
-    current_password = PasswordField(
-        'Enter your current password', [InputRequired()])
+    current_password = PasswordField('Enter your current password', [InputRequired()])
     new_password = PasswordField('Enter your new password', [InputRequired(), EqualTo('confirm_password')])
-    confirm_password = PasswordField(
-        "Confirm your new password", [InputRequired()])
+    confirm_password = PasswordField("Confirm your new password", [InputRequired()])
     change_password = SubmitField("Change password")
