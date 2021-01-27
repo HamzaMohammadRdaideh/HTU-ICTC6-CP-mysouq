@@ -11,6 +11,8 @@ class User(Document):
 
     # define class fields
     username = StringField(required = True, unique= True)
+    first_name = StringField(required = True)
+    last_name = StringField(required = True)
     password = StringField(required=True)
     brithday = DateTimeField(required=True)
     email = EmailField(required=True)
@@ -33,11 +35,20 @@ class User(Document):
 
 
 
+     # this method changes the user password
+    def change_password(self, current_password, new_password):
+        if current_password == self.password:
+            self.password = self.encrypt_password(new_password)
+
+
+
     # this method serializes the object into a JSON object
     def serialize(self):
         serialized = {
             "id": str(self.pk),
             'username': self.username,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'password': 'nice try :)!',
             'role': self.role,
             'email': self.email,

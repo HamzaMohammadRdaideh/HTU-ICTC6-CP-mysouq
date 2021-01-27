@@ -6,6 +6,8 @@ from wtforms.fields.html5 import EmailField , DateField
 class SignUpForm(FlaskForm):
 
     username = StringField("Username : ", [validators.InputRequired()])
+    first_name = StringField("First name : ")
+    last_name = StringField("Last name : ")
     password = PasswordField("Password : ", [validators.InputRequired()])
     email = EmailField("Email : " , [validators.InputRequired()])
     birthday = DateField("Brithday : " , [validators.InputRequired()] , format='%Y-%m-%d')
