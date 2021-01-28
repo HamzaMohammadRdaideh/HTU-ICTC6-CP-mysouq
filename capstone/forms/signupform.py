@@ -1,14 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, validators ,PasswordField ,TextAreaField
-from wtforms.fields.html5 import EmailField , DateField
+from wtforms import StringField, SubmitField, validators ,PasswordField ,TextAreaField 
+from wtforms.fields.html5 import EmailField , DateField 
 
 # Sign Up Account Settings Forms
 class SignUpForm(FlaskForm):
 
-    username = StringField("Username : ", [validators.InputRequired()])
-    first_name = StringField("First name : ")
-    last_name = StringField("Last name : ")
-    password = PasswordField("Password : ", [validators.InputRequired()])
-    email = EmailField("Email : " , [validators.InputRequired()])
+    username = StringField("Username : ", [validators.InputRequired()] , render_kw={"placeholder": "User Name"})
+    first_name = StringField("First name : " , render_kw={"placeholder": "First Name"})
+    last_name = StringField("Last name : " , render_kw={"placeholder": "Last Name"})
+    password = PasswordField("Password : ", [validators.InputRequired()] , render_kw={"placeholder": "**********"})
+    email = EmailField("Email : " , [validators.InputRequired()] , render_kw={"placeholder": "Email"})
     birthday = DateField("Brithday : " , [validators.InputRequired()] , format='%Y-%m-%d')
     submit = SubmitField("Sign-Up")    
