@@ -52,4 +52,4 @@ def logout():
     session.clear()
 
     # redirect to index
-    return redirect("/")
+    return redirect(url_for('login.login'))
