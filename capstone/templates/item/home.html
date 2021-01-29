@@ -23,7 +23,14 @@
   {% for item in items %}
 
   <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="#" alt="Card image cap">
+    
+    <ol class="mr-5">
+    <a href = "{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
+    <a href = "{{url_for('home.edit_item' , item_id = item.id)}}"><i class="far fa-edit" title="Edit"></i></a>
+    <a href = "{{url_for('home.delete_item' , item_id = item.id)}}"><i class="fas fa-trash-alt" title="Delete"></i></a>
+    </ol>
+
+    <img class="card-img-top" src="../../static/images/logi.png" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">
         <h5 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><b> HRD-Souq</b></h5>

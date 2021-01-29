@@ -108,4 +108,13 @@ def search_items():
         search_keyword = str(request.form['search_keyword'])  
         results = Item.objects.search_text(search_keyword).order_by('$text_score')
         
-        return render_template("item/search-result.html" , items = results , search_keyword = search_keyword)    
+        return render_template("item/search-result.html" , items = results , search_keyword = search_keyword)  
+
+
+@home_bp.route('/item/<item_id>/favorite')
+def add_favorite(item_id):
+
+    # Add post ID to favorites list
+    User.objects(id = session['user']['id']).update_one(add_to_set__favorite = item_id)
+    flash("Added as favorite !:)")
+    return redirect(url_for('home.home'))          
