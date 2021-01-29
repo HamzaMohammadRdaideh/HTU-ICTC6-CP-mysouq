@@ -75,7 +75,6 @@ def edit_item(item_id):
 
     return render_template("item/edit_item.html", form = edit_item_form)    
 
-
     
 @home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])
 def delete_item(item_id):
