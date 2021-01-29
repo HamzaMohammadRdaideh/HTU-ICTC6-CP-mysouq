@@ -7,7 +7,15 @@ from flask import session
 class Item(Document):
 
     # define class metadata
-    meta = {'collection' : 'item'}
+    meta = {'collection' : 'Items',
+             'indexes': [
+                {'fields': ['$title', '$description'],
+                 'default_language': 'english',
+                 'weights': {'title': 10, 'description': 2}
+                 }
+            ]
+            }
+
 
     # define class fields
     title = StringField(required = True)

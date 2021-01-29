@@ -11,7 +11,7 @@ def create_app(test_config=None):
     # configure the app
     app.config.from_mapping(
         SECRET_KEY='dev',
-        MONGO_URI="mongodb://root:example@localhost:27017/blog?authSource=admin"
+        MONGO_URI="mongodb://root:example@localhost:27017/capstone?authSource=admin"
     )
 
     # connect to MongoDB using mongoengine

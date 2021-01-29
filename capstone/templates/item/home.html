@@ -8,9 +8,18 @@
 <!-- content block -->
 {% block main %}
 
+
+
 <center>
+  
+  <form action="{{ url_for('home.search_items') }}" method="POST">
+    <input class="form-control form-control-lg" type="search" name="search_keyword" style="width: 25%;" placeholder=" Enter Keywords To Search" aria-label="Search">
+    <button class="btn btn-primary mt-3">Search</button>
+  </form> 
+  <hr>
+  <br>
 
-
+  
   {% for item in items %}
 
   <div class="card" style="width: 18rem;">
