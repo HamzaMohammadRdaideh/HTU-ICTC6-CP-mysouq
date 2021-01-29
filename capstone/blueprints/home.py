@@ -73,7 +73,7 @@ def edit_item(item_id):
 
         return redirect(url_for('home.home'))
 
-    return render_template("item/edit_item.html", form = edit_item_form)    
+    return render_template("item/edit_item.html", form = edit_item_form , title = 'Edit-Item' , icon = 'far fa-edit')    
 
     
 @home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])

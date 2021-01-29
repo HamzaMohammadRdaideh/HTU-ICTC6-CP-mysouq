@@ -37,7 +37,7 @@ def login():
         return redirect("/profile")
 
     # render the login template
-    return render_template('login/login.html', form=login_form)
+    return render_template('login/login.html', form = login_form , icon = 'fas fa-sign-in-alt' , title = 'Log-In')
 
 
 @login_bp.route('/session')

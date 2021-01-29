@@ -9,54 +9,54 @@
 {% block main %}
 
 <center>
-<div>
-  <div class="col-lg-4 col-md-6 col-sm-12">
-    <h2>
-      <i class="fas fa-user-plus"></i> Sign-Up
-    </h2>
+  <div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <h2>
+        <i class="{{icon}}"></i> {{title}}
+      </h2>
+    </div>
   </div>
-</div>
 
 
-<div>
-  <div class="col-lg-4 col-md-6 col-sm-12">
-    <form method="POST" action="">
-      {{form.hidden_tag()}}
-      <div class="row my-3">
-        {{form.username.label(class_="form-label")}}
-        {{form.username(class_="form-control")}}
-      </div>
-      
-      <div class="row my-3">
-        {{form.first_name.label(class_="form-label")}}
-        {{form.first_name(class_="form-control")}}
-      </div>
+  <div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <form method="POST" action="">
+        {{form.hidden_tag()}}
+        <div class="row my-3">
+          {{form.username.label(class_="form-label")}}
+          {{form.username(class_="form-control")}}
+        </div>
 
-      <div class="row my-3">
-        {{form.last_name.label(class_="form-label")}}
-        {{form.last_name(class_="form-control")}}
-      </div>
+        <div class="row my-3">
+          {{form.first_name.label(class_="form-label")}}
+          {{form.first_name(class_="form-control")}}
+        </div>
 
-      <div class="row my-3">
-        {{form.password.label(class_="form-label")}}
-        {{form.password(id_="username", class_="form-control")}}
-      </div>
+        <div class="row my-3">
+          {{form.last_name.label(class_="form-label")}}
+          {{form.last_name(class_="form-control")}}
+        </div>
 
-      <div class="row my-3">
-        {{form.birthday.label(class_="form-label")}}
-        {{form.birthday(class_="form-control")}}
-      </div>
+        <div class="row my-3">
+          {{form.password.label(class_="form-label")}}
+          {{form.password(id_="username", class_="form-control")}}
+        </div>
 
-      <div class="row my-3">
-        {{form.email.label(class_="form-label")}}
-        {{form.email(class_="form-control")}}
-      </div>
+        <div class="row my-3">
+          {{form.birthday.label(class_="form-label")}}
+          {{form.birthday(class_="form-control")}}
+        </div>
 
-      <hr class="mb-4" />
-      {{form.submit(class_="form-control btn btn-primary text-white mb-5")}}
-    </form>
+        <div class="row my-3">
+          {{form.email.label(class_="form-label")}}
+          {{form.email(class_="form-control")}}
+        </div>
 
+        <hr class="mb-4" />
+        {{form.submit(class_="form-control btn btn-primary text-white mb-5")}}
+      </form>
+
+    </div>
   </div>
-</div>
 </center>
 {% endblock %}

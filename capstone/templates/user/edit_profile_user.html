@@ -9,35 +9,33 @@
 {% block main %}
 
 <center>
-<div>
-  <div class="col-lg-4 col-md-6 col-sm-12">
-    <h2>
-      Edit-Profile
-    </h2>
+  <div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <h2><i class="{{icon}}"></i>{{title}}</h2>
+    </div>
   </div>
-</div>
 
 
-<div class="container-fluid mt-5">
-  <div class="col mx-auto card bg-light p-5">
-    <form method="POST" action="">
-      {{form.hidden_tag()}}
-   
-      <div class="row my-3">
-        {{form.new_first_name.label(class_="form-label")}}
-        {{form.new_first_name(class_="form-control")}}
-      </div>
+  <div class="container-fluid mt-5">
+    <div class="col mx-auto card bg-light p-5">
+      <form method="POST" action="">
+        {{form.hidden_tag()}}
 
-      <div class="row my-3">
-        {{form.new_last_name.label(class_="form-label")}}
-        {{form.new_last_name(class_="form-control")}}
-      </div>
+        <div class="row my-3">
+          {{form.new_first_name.label(class_="form-label")}}
+          {{form.new_first_name(class_="form-control")}}
+        </div>
 
-      <hr class="mb-4" />
-      {{form.submit(class_="form-control btn btn-primary text-white")}}
-    </form>
+        <div class="row my-3">
+          {{form.new_last_name.label(class_="form-label")}}
+          {{form.new_last_name(class_="form-control")}}
+        </div>
 
+        <hr class="mb-4" />
+        {{form.submit(class_="form-control btn btn-primary text-white")}}
+      </form>
+
+    </div>
   </div>
-</div>
 </center>
 {% endblock %}

@@ -32,4 +32,4 @@ def signup():
 
         return redirect(url_for("login.login"))
 
-    return render_template("sign-up/sign-up.html" , form = signup_form)    
+    return render_template("sign-up/sign-up.html" , form = signup_form , title = 'Sign-Up' , icon = 'fas fa-user-plus')    

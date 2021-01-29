@@ -38,7 +38,7 @@ def edit_profile_user():
 
         return redirect(url_for('home.home')) 
 
-    return render_template("user/edit_profile_user.html", form = edit_profile_form)
+    return render_template("user/edit_profile_user.html", form = edit_profile_form , title = 'Edit-Profile' , icon = 'fas fa-user-edit')
 
 
 @user_bp.route('/user/change_password', methods=['GET', 'POST'])
@@ -60,6 +60,6 @@ def change_password():
             flash("Your password has been successfully changed.")
             return redirect(url_for('user.change_password'))
 
-    return render_template("user/change_password.html", form=change_password_form)
+    return render_template("user/change_password.html", form=change_password_form , title = 'Change-Password' , icon = 'fas fa-key') 
 
 
