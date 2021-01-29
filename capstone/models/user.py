@@ -14,7 +14,7 @@ class User(Document):
     first_name = StringField(required = True)
     last_name = StringField(required = True)
     password = StringField(required=True)
-    brithday = DateTimeField(required=True)
+    birthday = DateTimeField(required=True)
     email = EmailField(required=True)
     favorite = ListField(StringField())
     role = IntField(default = 0)

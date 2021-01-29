@@ -15,3 +15,18 @@ class AddItemForm(FlaskForm):
     image = FileField()
 
     submit = SubmitField("Add Item")
+
+
+class EditItemForm(FlaskForm):
+
+    new_title = StringField("Title: ", [validators.InputRequired()])
+
+    new_description = TextAreaField("Description: ", [validators.InputRequired()])
+
+    new_price = FloatField("Price: ", [validators.InputRequired()])
+
+    new_category = SelectField("Category: ", choices=[('1', 'Clothes'), ('2', 'Vehicles'), ('3', 'Digital Devices')])
+
+    new_image = FileField()
+
+    submit = SubmitField("Edit Item")    

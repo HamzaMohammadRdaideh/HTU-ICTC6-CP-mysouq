@@ -1,5 +1,6 @@
 from mongoengine import *
 from datetime import datetime
+from flask import session
 # from . request import BuyRequest 
 
 
@@ -17,3 +18,5 @@ class Item(Document):
     category = StringField(required = True)
     buy_request_list = ListField(StringField())
     hidden = BooleanField(default = False)
+
+

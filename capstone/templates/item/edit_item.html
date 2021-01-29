@@ -2,7 +2,7 @@
 
 <!-- header block -->
 {% block header %}
-{% block title %}Add-Item{% endblock %}
+{% block title %}Edit-Item{% endblock %}
 {% endblock %}
 
 <!-- content block -->
@@ -14,7 +14,8 @@
   <div>
     <div class="col-lg-4 col-md-6 col-sm-12">
       <h2>
-        <i class="{{icon}}"></i> {{title}}</h2>
+        Edit-Item
+      </h2>
     </div>
   </div>
 
@@ -23,20 +24,20 @@
       <form method="POST" action="">
         {{form.hidden_tag()}}
         <div class="row my-3">
-          {{form.title.label(class_="form-label")}}
-          {{form.title(class_="form-control")}}
+          {{form.new_title.label(class_="form-label")}}
+          {{form.new_title(class_="form-control")}}
         </div>
         <div class="row my-3">
-          {{form.description.label(class_="form-label")}}
-          {{form.description(class_="form-control")}}
+          {{form.new_description.label(class_="form-label")}}
+          {{form.new_description(class_="form-control")}}
         </div>
         <div class="row my-3">
-          {{form.price.label(class_="form-label")}}
-          {{form.price(class_="form-control")}}
+          {{form.new_price.label(class_="form-label")}}
+          {{form.new_price(class_="form-control")}}
         </div>
         <div class="row my-3">
-          {{form.category.label(class_="form-label")}}
-          {{form.category(class_="form-control")}}
+          {{form.new_category.label(class_="form-label")}}
+          {{form.new_category(class_="form-control")}}
         </div>
 
         <hr class="mb-4" />
