@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, session, flash 
 from flask_wtf import FlaskForm
 from capstone.models import User , Item 
 from capstone.forms.items import AddItemForm , EditItemForm
+from capstone.models.request import BuyRequest
 from bson import ObjectId
 
 
@@ -118,3 +119,16 @@ def add_favorite(item_id):
     User.objects(id = session['user']['id']).update_one(add_to_set__favorite = item_id)
     flash("Added as favorite !:)")
     return redirect(url_for('home.home'))          
+
+
+@home_bp.route('/item/<item_id>/buy')
+def buy_item(item_id):
+
+    buy_request = BuyRequest(user = session['user']['id'] , item = item_id , status = 'pending')
+    buy_request.save()
+    
+    buy_requests = BuyRequest.objects()
+
+    Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
+
+    return redirect(url_for('home.home', buy_requests = buy_requests))

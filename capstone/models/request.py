@@ -7,7 +7,7 @@ from . user import User
 class BuyRequest(Document):
 
     # define class metadata
-    meta = {'collection' : 'buy_requests'}
+    meta = {'collection' : 'buy_request'}
 
     # define class fields    
     user = ReferenceField(User)

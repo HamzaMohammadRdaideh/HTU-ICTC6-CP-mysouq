@@ -10,5 +10,5 @@ class SignUpForm(FlaskForm):
     last_name = StringField("Last name : " , render_kw={"placeholder": "Last Name"})
     password = PasswordField("Password : ", [validators.InputRequired()] , render_kw={"placeholder": "**********"})
     email = EmailField("Email : " , [validators.InputRequired()] , render_kw={"placeholder": "Email"})
-    birthday = DateField("Brithday : " , [validators.InputRequired()] , format='%Y-%m-%d')
+    birthday = DateField("Birthday : " , [validators.InputRequired()] , format='%Y-%m-%d')
     submit = SubmitField("Sign-Up")    

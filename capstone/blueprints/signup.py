@@ -25,7 +25,7 @@ def signup():
         user.last_name = signup_form.last_name.data
         user.password = user.encrypt_password(signup_form.password.data)
         user.email = signup_form.email.data
-        user.brithday = signup_form.birthday.data
+        user.birthday = signup_form.birthday.data
 
         # save the user object
         user.save()
