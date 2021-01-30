@@ -30,6 +30,13 @@ def create_app(test_config=None):
 
         user_1 = User(username='Admin',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com' , first_name='Admin', last_name='Admin').save()
 
+        user_2 = User(username='hamza_96',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com' , first_name='hamza', last_name='rdaideh').save()
+
+        user_3 = User(username='reema_95',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com' , first_name='Admin', last_name='eilouti').save()
+
+        user_4 = User(username='hesham_94',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com' , first_name='hesham', last_name='marei').save()
+
+
         item_1 = Item(title = "First", description = 'First' ,date = "2009-12-30 14:09:01", price = "0" , category = "clothes").save()
 
         item_2 = Item(title = "Sec" , description = 'First' ,date = "2020-12-30 14:09:01", price = "0" , category = "clothes").save()
@@ -44,17 +51,21 @@ def create_app(test_config=None):
     from .blueprints.login import login_bp
     app.register_blueprint(login_bp)
 
-    # register the 'user' blueprint
+    # register the 'signup' blueprint
     from .blueprints.signup import signup_bp
     app.register_blueprint(signup_bp)
 
-    # register the 'user' blueprint
+    # register the 'home' blueprint
     from .blueprints.home import home_bp
     app.register_blueprint(home_bp)
 
    # register the 'user' blueprint
     from .blueprints.user import user_bp
     app.register_blueprint(user_bp)
+ 
+ # register the 'user' blueprint
+    from .blueprints.profile import profile_bp
+    app.register_blueprint(profile_bp)
 
     return app
 

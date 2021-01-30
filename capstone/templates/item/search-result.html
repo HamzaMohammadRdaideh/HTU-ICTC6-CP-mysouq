@@ -8,6 +8,7 @@
 
 <!-- content block -->
 {% block main %}
+<center>
 {% if items %}
     {% for item in items %}
     
@@ -33,4 +34,5 @@
 {% else %}
 <P>Nothing found with the word "{{search_keyword}}"</P>
 {% endif %}
+</center>
 {% endblock %}

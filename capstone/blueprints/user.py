@@ -36,7 +36,7 @@ def edit_profile_user():
 
         session['user'] = user.serialize()
 
-        return redirect(url_for('home.home')) 
+        return redirect(url_for('profile.profile')) 
 
     return render_template("user/edit_profile_user.html", form = edit_profile_form , title = 'Edit-Profile' , icon = 'fas fa-user-edit')
 
@@ -58,7 +58,7 @@ def change_password():
             user.change_password(current_password, new_password)
             user.save()
             flash("Your password has been successfully changed.")
-            return redirect(url_for('user.change_password'))
+            return redirect(url_for('profile.profile'))
 
     return render_template("user/change_password.html", form=change_password_form , title = 'Change-Password' , icon = 'fas fa-key') 
 

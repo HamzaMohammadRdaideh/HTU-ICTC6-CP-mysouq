@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+<!-- title -->
+{% block title %}Profile{% endblock %}
+
+<!-- content block -->
+{% block main %}
+
+<!-- edit user -->
+
+<center>
+
+    <div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2><i class="{{icon}}"></i>{{title}}</h2>
+        </div>
+    </div>
+</center>
+<center>
+
+    <a href="{{url_for('user.edit_profile_user')}}"> <button type="button"
+            class="btn btn-primary">Edit-Profile</button></a>
+    <a href="{{url_for('user.change_password')}}"><button type="button"
+            class="btn btn-primary">Change-Password</button></a>
+    <a href="{{url_for('profile.display_users')}}"><button type="button" class="btn btn-primary">Display-Users</button></a>
+    <br> <br>
+
+    <div class="card" style="width: 18rem;">
+        <img src="../../static/images/136.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">HRD-Souq</h5>
+            <p class="card-text">Your Profile Details.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">username : {{user.username}}</li>
+            <li class="list-group-item">First Name : {{user.first_name}}</li>
+            <li class="list-group-item">Last Name : {{user.last_name}}</li>
+            <li class="list-group-item">Birthday : {{user.birthday}}</li>
+            <li class="list-group-item">Email : {{user.email}}</li>
+        </ul>
+
+    </div>
+</center>
+{% endblock %}

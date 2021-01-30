@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+<!-- title -->
+{% block title %}Profile{% endblock %}
+
+<!-- content block -->
+{% block main %}
+
+<!-- edit user -->
+
+<center>
+
+    <div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2><i class="{{icon}}"></i>{{title}}</h2>
+        </div>
+    </div>
+</center>
+
+<center>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{{users | count}} - Users</th>
+                <th scope="col">Username</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+
+
+                <th scope="row">{{loop.index}}</th>
+                <td>{{user.username}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <a href="{{url_for('profile.remove_user' , user_id = user.id)}}"><i class="fas fa-user-times" title="Remove-User"></i></a>
+                    <i class="fas fa-user-slash" title="Disable-User"></i>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+   
+</center>
+{% endblock %}

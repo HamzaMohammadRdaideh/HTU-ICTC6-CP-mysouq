@@ -124,6 +124,7 @@ def add_favorite(item_id):
 @home_bp.route('/item/<item_id>/buy')
 def buy_item(item_id):
 
+
     buy_request = BuyRequest(user = session['user']['id'] , item = item_id , status = 'pending')
     buy_request.save()
     

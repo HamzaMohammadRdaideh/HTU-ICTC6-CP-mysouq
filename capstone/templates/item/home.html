@@ -21,7 +21,10 @@
   </form>
 
   <hr>
-  <br>
+    <a href="{{url_for('home.add_item')}}"> <button type="button" class="btn btn-primary">Add-Item</button></a>
+    <a href="{{url_for('home.sort_price_items')}}"><button type="button" class="btn btn-primary">Sort By Price</button></a>
+    <a href="{{url_for('home.sort_date_items')}}"><button type="button" class="btn btn-primary">Sort By Date</button></a>
+  <br> <br>
 
 
   {% for item in items %}
@@ -50,12 +53,14 @@
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
       <h5><b>Cateogory : </b> {{item.category}} </h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
+      <h5><b>Cateogory : </b> {{item.date}} </h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
       </p>
-      {% if  %}
+      
+      {% if item  %}
       <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
       {% else %}
-      <p> hi</p>
+      <a class="btn btn-primary text-white disabled">Buy</a>
       {% endif %}
 
     </div>
@@ -65,11 +70,9 @@
   {% endfor %}
 
 
-
-  {% if not items %}
+  
   <P>No Items, Do You Want To ADD An Item?<a href="{{url_for('home.add_item')}}"> Add-Item</a> </P>
-  {% endif %}
-
+ 
 </center>
 
 {% endblock %}
