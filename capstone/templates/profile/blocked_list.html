@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 <!-- title -->
-{% block title %}Profile{% endblock %}
+{% block title %}Disabled-List{% endblock %}
 
 <!-- content block -->
 {% block main %}
@@ -11,7 +11,7 @@
 
     <div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <h2><i class="{{icon}}"></i>{{title}}</h2>
+            <h2><i class="{{icon}}"></i> {{title}}</h2>
         </div>
     </div>
 </center>
@@ -44,8 +44,7 @@
                 <td>{{user.last_name}}</td>
                 <td>{{user.email}}</td>
                 <td>
-                    <a href="{{url_for('profile.remove_user' , user_id = user.id)}}"><i class="fas fa-user-times" title="Remove-User"></i></a>
-                    <a href="{{url_for('profile.disable_user_list' , user_id = user.id)}}"> <i class="fas fa-user-slash" title="Disable-User"></i></a>
+                    <a href="{{url_for('profile.unlock_disable_user_user_list' , user_id = user.id)}}"> <i class="fas fa-unlock ml-3" title="Unlock"></i></a>
                 </td>
 
             </tr>
@@ -53,7 +52,7 @@
 
         </tbody>
     </table>
-    <a href="{{url_for('profile.disabled_list')}}"><button type="button" class="btn btn-primary">Disabled-Users-List</button></a>
+    <a href="{{url_for('profile.display_users')}}"><button type="button" class="btn btn-primary">Users-List</button></a>
 
    </div></div>
 </center>

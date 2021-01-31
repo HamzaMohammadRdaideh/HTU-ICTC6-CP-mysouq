@@ -7,6 +7,7 @@ from capstone.models import User
 # define our blueprint
 login_bp = Blueprint('login', __name__)
 
+@login_bp.route("/" , methods = ['POST' , 'GET'])
 @login_bp.route('/login', methods=['POST', 'GET'])
 def login():
 

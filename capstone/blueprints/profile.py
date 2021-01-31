@@ -8,7 +8,6 @@ from .user import disable_user , login_required , maintenance
 # define our blueprint
 profile_bp = Blueprint('profile', __name__)
 
-@profile_bp.route("/" , methods = ['POST' , 'GET'])
 @profile_bp.route('/profile', methods=['POST', 'GET'])
 @maintenance
 @login_required
@@ -37,7 +36,11 @@ def display_users():
 @disable_user
 def remove_user(user_id):
 
-    User.objects(id = user_id).first().delete()
+    
+    user = User.objects(id = user_id).first()
+    user.delete()
+
+    flash(f"Account '{user.username}' has been deleted.!")
 
     return redirect(url_for('profile.display_users'))
 
@@ -54,6 +57,27 @@ def disable_user_list(user_id) :
 
     user.save()
 
+    flash(f"Account '{user.username}' has been disabled.!")
+
+
+    return redirect(url_for('profile.display_users'))
+
+
+@profile_bp.route('/unlock_disable_user/<user_id>', methods=['POST', 'GET'])
+@maintenance
+@login_required
+@disable_user    
+def unlock_disable_user_user_list(user_id) :
+    
+    user = User.objects(id = user_id).first()
+    
+    user.disable = False
+
+    user.save()
+
+    flash(f"Account '{user.username}' has been unlocked.!")
+
+
     return redirect(url_for('profile.display_users'))
 
 
@@ -64,7 +88,8 @@ def disable_user_list(user_id) :
 def maintenance_mode() :
 
     User.objects(role = 0 and 1).update(maintenance = True) 
-    
+    flash('The Website now in Maintenance!')
+
     return redirect(url_for('profile.profile'))
 
 
@@ -75,5 +100,19 @@ def maintenance_mode() :
 def remove_maintenance_mode() :
     
     User.objects(role = 0 and 1).update(maintenance = False) 
+
+    flash('The Website now on!')
     
     return redirect(url_for('profile.profile'))
+
+
+@profile_bp.route('/disable_users_list', methods=['POST', 'GET'])
+@maintenance
+@login_required
+@disable_user   
+def disabled_list():
+
+    users = User.objects(disable = True)
+
+    return render_template('profile/blocked_list.html' , users = users, title = "Blocked-List" , icon = 'fas fa-users')
+    
