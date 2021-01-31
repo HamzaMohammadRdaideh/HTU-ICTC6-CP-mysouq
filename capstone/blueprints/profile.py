@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
-from capstone.models import User
+from capstone.models import User , BuyRequest
 from bson.objectid import ObjectId
 from .user import disable_user , login_required , maintenance
 
@@ -116,3 +116,14 @@ def disabled_list():
 
     return render_template('profile/blocked_list.html' , users = users, title = "Blocked-List" , icon = 'fas fa-users')
     
+
+@profile_bp.route('/buy_request_list/<user_id>', methods=['POST', 'GET'])
+@maintenance
+@login_required
+@disable_user  
+def buy_request_list(user_id):
+
+    user = User.objects()
+    list_request = BuyRequest.objects(id == user_id)
+
+    return render_template('profile/buy_request_list.html' , user = user , list_request = list_request ,title = 'Buy-Request' , icon = 'fas fa-shopping-cart')
