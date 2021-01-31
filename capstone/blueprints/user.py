@@ -14,11 +14,12 @@ def login_required(function):
     @wraps(function)
     def check_required(*args, **kwargs):
 
-        if session ['user']['id'] in session :
+        if  session['user']['id'] :
             return function(*args, **kwargs)
 
         else:
             return redirect(url_for('login.login'))
+
     return check_required
 
 
@@ -34,7 +35,20 @@ def disable_user(function):
     return check
 
 
+def maintenance(function):
+    @wraps(function)
+    def check(*args, **kwargs):
+
+        if session['user']['maintenance'] == False:
+            return function(*args, **kwargs)
+
+        else:
+            return render_template('user/maintenance.html')
+    return check
+
+    
 @user_bp.route('/user/edit_profile', methods=['POST', 'GET'])
+@maintenance
 @login_required
 @disable_user
 def edit_profile_user():
@@ -69,6 +83,7 @@ def edit_profile_user():
 
 
 @user_bp.route('/user/change_password', methods=['GET', 'POST'])
+@maintenance
 @login_required
 @disable_user
 def change_password():

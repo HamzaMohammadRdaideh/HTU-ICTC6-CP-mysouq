@@ -19,6 +19,7 @@ class User(Document):
     favorite = ListField(StringField())
     role = IntField(default = 0)
     disable = BooleanField(default = False)
+    maintenance = BooleanField(default = False) 
 
     # this method authenticates the user using credentials
     def authenticate(self, username, password):
@@ -33,7 +34,6 @@ class User(Document):
     
     def encrypt_password(self, password):
         return pbkdf2_sha256.hash(password)        
-
 
 
     # this method changes the user password
@@ -53,8 +53,15 @@ class User(Document):
             'role': self.role,
             'email': self.email,
             'favorite': self.favorite,
+            'maintenance' : self.maintenance,
             'disable': self.disable
         }
 
         return serialized
 
+
+# class UserQuerySet(QuerySet):
+
+    # def maintanence_mode(self):
+
+    #     return self.filter(role = 0 and 1).update(maintenance = True)

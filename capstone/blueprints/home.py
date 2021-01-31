@@ -4,7 +4,7 @@ from capstone.models import User , Item
 from capstone.forms.items import AddItemForm , EditItemForm
 from capstone.models.request import BuyRequest
 from bson import ObjectId
-from .user import disable_user , login_required
+from .user import disable_user , login_required , maintenance
 
 # define our blueprint
 home_bp = Blueprint('home', __name__)
@@ -15,6 +15,7 @@ home_bp = Blueprint('home', __name__)
 
 
 @home_bp.route('/home', methods=['POST', 'GET'])
+@maintenance
 @login_required
 @disable_user
 def home():
@@ -26,6 +27,7 @@ def home():
 
 
 @home_bp.route('/user/add_item', methods=['GET', 'POST'])
+@maintenance
 @login_required
 @disable_user
 def add_item():
@@ -51,6 +53,7 @@ def add_item():
 
 
 @home_bp.route('/user/edit_item/<item_id>', methods=['GET', 'POST'])
+@maintenance
 @login_required
 @disable_user
 def edit_item(item_id):
@@ -84,6 +87,7 @@ def edit_item(item_id):
 
     
 @home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])
+@maintenance
 @login_required
 @disable_user
 def delete_item(item_id):
@@ -94,6 +98,7 @@ def delete_item(item_id):
 
 
 @home_bp.route('/sort-item/date', methods=['GET', 'POST'])
+@maintenance
 @login_required
 @disable_user
 def sort_date_items():
@@ -104,6 +109,7 @@ def sort_date_items():
 
 
 @home_bp.route('/sort-item/price', methods=['GET', 'POST'])
+@maintenance
 @login_required
 @disable_user
 def sort_price_items():
@@ -114,6 +120,7 @@ def sort_price_items():
 
 
 @home_bp.route("/item/search", methods=['POST'])
+@maintenance
 @login_required
 @disable_user
 def search_items():
@@ -127,6 +134,7 @@ def search_items():
 
 
 @home_bp.route('/item/<item_id>/favorite')
+@maintenance
 @login_required
 @disable_user
 def add_favorite(item_id):
@@ -138,6 +146,7 @@ def add_favorite(item_id):
 
 
 @home_bp.route('/item/<item_id>/buy')
+@maintenance
 @login_required
 @disable_user
 def buy_item(item_id):
