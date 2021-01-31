@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from capstone.forms import LoginForm
 from capstone.models import User
 
+
 # define our blueprint
 login_bp = Blueprint('login', __name__)
 
@@ -28,13 +29,13 @@ def login():
 
             # redirect the user after login
             return redirect(url_for('home.home'))
+
         else:
             # invalid credentials, redirect to login with error message
             flash("Login invalid. Please check your username and password.")
             return redirect(url_for('login.login'))
 
-
-        return redirect("/profile")
+        return redirect(url_for('profile.profile'))
 
     # render the login template
     return render_template('login/login.html', form = login_form , icon = 'fas fa-sign-in-alt' , title = 'Log-In')

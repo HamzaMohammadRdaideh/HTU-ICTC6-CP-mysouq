@@ -4,7 +4,7 @@ from capstone.models import User , Item
 from capstone.forms.items import AddItemForm , EditItemForm
 from capstone.models.request import BuyRequest
 from bson import ObjectId
-
+from .user import disable_user , login_required
 
 # define our blueprint
 home_bp = Blueprint('home', __name__)
@@ -15,6 +15,8 @@ home_bp = Blueprint('home', __name__)
 
 
 @home_bp.route('/home', methods=['POST', 'GET'])
+@login_required
+@disable_user
 def home():
 
     items = Item.objects()
@@ -24,6 +26,8 @@ def home():
 
 
 @home_bp.route('/user/add_item', methods=['GET', 'POST'])
+@login_required
+@disable_user
 def add_item():
 
     add_item_form = AddItemForm()
@@ -47,6 +51,8 @@ def add_item():
 
 
 @home_bp.route('/user/edit_item/<item_id>', methods=['GET', 'POST'])
+@login_required
+@disable_user
 def edit_item(item_id):
 
     edit_item_form = EditItemForm()
@@ -78,6 +84,8 @@ def edit_item(item_id):
 
     
 @home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])
+@login_required
+@disable_user
 def delete_item(item_id):
 
     Item.objects(id = item_id).first().delete()
@@ -86,6 +94,8 @@ def delete_item(item_id):
 
 
 @home_bp.route('/sort-item/date', methods=['GET', 'POST'])
+@login_required
+@disable_user
 def sort_date_items():
 
     items = Item.objects.order_by('-date')
@@ -94,6 +104,8 @@ def sort_date_items():
 
 
 @home_bp.route('/sort-item/price', methods=['GET', 'POST'])
+@login_required
+@disable_user
 def sort_price_items():
 
     items = Item.objects.order_by('-price')
@@ -102,6 +114,8 @@ def sort_price_items():
 
 
 @home_bp.route("/item/search", methods=['POST'])
+@login_required
+@disable_user
 def search_items():
     
     if request.method == 'POST':
@@ -113,6 +127,8 @@ def search_items():
 
 
 @home_bp.route('/item/<item_id>/favorite')
+@login_required
+@disable_user
 def add_favorite(item_id):
 
     # Add post ID to favorites list
@@ -122,6 +138,8 @@ def add_favorite(item_id):
 
 
 @home_bp.route('/item/<item_id>/buy')
+@login_required
+@disable_user
 def buy_item(item_id):
 
 

@@ -43,7 +43,7 @@
                 <td>{{user.email}}</td>
                 <td>
                     <a href="{{url_for('profile.remove_user' , user_id = user.id)}}"><i class="fas fa-user-times" title="Remove-User"></i></a>
-                    <i class="fas fa-user-slash" title="Disable-User"></i>
+                    <a href="{{url_for('profile.disable_user_list' , user_id = user.id)}}"> <i class="fas fa-user-slash" title="Disable-User"></i></a>
                 </td>
 
             </tr>
