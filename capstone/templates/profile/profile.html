@@ -22,13 +22,13 @@
             class="btn btn-primary">Change-Password</button></a>
     <a href="{{url_for('profile.display_users')}}"><button type="button" class="btn btn-primary">Display-Users</button></a>
     
-    
+    <a href="{{url_for('profile.view_favorite')}}"><button type="button" class="btn btn-primary">Favorites-List</button></a>
+
 
     <a href="{{url_for('profile.maintenance_mode')}}"><button type="button" class="btn btn-primary">Maintanance-Mode</button></a>
     <a href="{{url_for('profile.remove_maintenance_mode')}}"><button type="button" class="btn btn-primary">Remove-Maintanance-Mode</button></a>
 
     <a href="{{url_for('profile.buy_request_list' , user_id = user.id)}}"><button type="button" class="btn btn-primary">Your-Buy-Requests</button></a>
-
 
     <br> <br>
 

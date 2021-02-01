@@ -15,9 +15,9 @@ home_bp = Blueprint('home', __name__)
 
 
 @home_bp.route('/home', methods=['POST', 'GET'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def home():
 
     user = User.objects()
@@ -28,9 +28,9 @@ def home():
 
 
 @home_bp.route('/user/add_item', methods=['GET', 'POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def add_item():
 
     add_item_form = AddItemForm()
@@ -54,9 +54,9 @@ def add_item():
 
 
 @home_bp.route('/user/edit_item/<item_id>', methods=['GET', 'POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def edit_item(item_id):
 
     edit_item_form = EditItemForm()
@@ -88,9 +88,9 @@ def edit_item(item_id):
 
     
 @home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def delete_item(item_id):
 
     Item.objects(id = item_id).first().delete()
@@ -99,9 +99,9 @@ def delete_item(item_id):
 
 
 @home_bp.route('/sort-item/date', methods=['GET', 'POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def sort_date_items():
 
     items = Item.objects.order_by('-date')
@@ -110,9 +110,9 @@ def sort_date_items():
 
 
 @home_bp.route('/sort-item/price', methods=['GET', 'POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def sort_price_items():
 
     items = Item.objects.order_by('-price')
@@ -121,9 +121,9 @@ def sort_price_items():
 
 
 @home_bp.route("/item/search", methods=['POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def search_items():
     
     if request.method == 'POST':
@@ -135,9 +135,9 @@ def search_items():
 
 
 @home_bp.route('/item/<item_id>/favorite')
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def add_favorite(item_id):
 
     # Add post ID to favorites list
@@ -147,19 +147,22 @@ def add_favorite(item_id):
 
 
 @home_bp.route('/item/<item_id>/buy')
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def buy_item(item_id):
 
+    request = BuyRequest.objects(user = session['user']['id'], item = item_id).first()
 
-    buy_request = BuyRequest(user = session['user']['id'] , item = item_id , status = 'pending')
-    buy_request.save()
-    
-    buy_requests = BuyRequest.objects(item = item_id)
+    if not request:
 
-    print(buy_requests)
-    
-    Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
+        buy_request = BuyRequest(user = session['user']['id'], item = item_id, status = 'Pending')
 
-    return redirect(url_for('home.home', buy_requests = buy_requests))
+        buy_request.save()
+        
+        Item.objects(id = item_id).update_one(add_to_set__buy_requests_list = buy_request.id)
+
+    else:
+        flash("Item already in you Buy-Requests.")
+
+    return redirect(url_for('home.home' , request = request))
