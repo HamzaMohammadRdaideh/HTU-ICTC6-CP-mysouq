@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
-from capstone.models import User , BuyRequest ,Item
+from capstone.models import User , BuyRequest ,Item , UpgradeRequest
 from bson.objectid import ObjectId
 from .user import disable_user , login_required , maintenance
 
@@ -150,3 +150,22 @@ def view_favorite():
     return render_template("profile/user_favorite_items.html" , items = items , title = 'Favorites-Items' , icon = 'fas fa-star')
 
 
+@profile_bp.route('/request_upgrade', methods=['GET', 'POST'])
+@login_required
+@disable_user
+@maintenance 
+def request_upgrade():
+
+    request = UpgradeRequest.objects(user = session['user']['id']).first()
+
+    if not request:
+
+        upgrade_request = UpgradeRequest(user = session['user']['id'], status = "Pending")
+
+        upgrade_request.save()
+
+    else:
+
+        flash("You have already requested an upgrade.")
+
+    return redirect(url_for('profile.profile'))
