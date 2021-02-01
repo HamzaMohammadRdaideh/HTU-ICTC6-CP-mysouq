@@ -57,11 +57,11 @@
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
       </p>
       
-      {% if item  %}
-      <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
-      {% else %}
-      <a class="btn btn-primary text-white disabled">Buy</a>
-      {% endif %}
+        {% if item %}
+        <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
+        {% else %}
+        <a class="btn btn-primary text-white disabled">Buy</a>
+        {% endif %}
 
     </div>
   </div>

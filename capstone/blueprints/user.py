@@ -14,10 +14,12 @@ def login_required(function):
     @wraps(function)
     def check_required(*args, **kwargs):
 
-        if  session['user']['id'] :
+        try:  
+            session['user']['id'] 
             return function(*args, **kwargs)
 
-        else:
+        except:
+            
             return redirect(url_for('login.login'))
 
     return check_required
@@ -27,11 +29,15 @@ def disable_user(function):
     @wraps(function)
     def check(*args, **kwargs):
 
-        if session['user']['disable'] == False:
-            return function(*args, **kwargs)
+        try:
+            if session['user']['disable'] == False :
+                return function(*args, **kwargs)
 
-        else:
+            else :
+                return render_template('user/disable.html')
+        except:
             return render_template('user/disable.html')
+    
     return check
 
 
@@ -39,18 +45,23 @@ def maintenance(function):
     @wraps(function)
     def check(*args, **kwargs):
 
-        if session['user']['maintenance'] == False:
-            return function(*args, **kwargs)
+        try:
+            if session['user']['maintenance'] == False:
+                return function(*args, **kwargs)
 
-        else:
+            else :
+                return render_template('user/maintenance.html')
+
+        except:
             return render_template('user/maintenance.html')
+    
     return check
 
     
 @user_bp.route('/user/edit_profile', methods=['POST', 'GET'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def edit_profile_user():
 
     user = User.objects(id = session["user"]['id']).first()
@@ -83,9 +94,9 @@ def edit_profile_user():
 
 
 @user_bp.route('/user/change_password', methods=['GET', 'POST'])
-@maintenance
 @login_required
 @disable_user
+@maintenance
 def change_password():
 
     user = User.objects(id=session['user']['id']).first()

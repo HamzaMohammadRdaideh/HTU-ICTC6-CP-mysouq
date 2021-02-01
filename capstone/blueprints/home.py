@@ -20,9 +20,10 @@ home_bp = Blueprint('home', __name__)
 @disable_user
 def home():
 
+    user = User.objects()
     items = Item.objects()
 
-    return render_template('item/home.html', items = items)
+    return render_template('item/home.html' ,user = user ,items = items)
 
 
 
@@ -155,8 +156,10 @@ def buy_item(item_id):
     buy_request = BuyRequest(user = session['user']['id'] , item = item_id , status = 'pending')
     buy_request.save()
     
-    buy_requests = BuyRequest.objects()
+    buy_requests = BuyRequest.objects(item = item_id)
 
+    print(buy_requests)
+    
     Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
 
     return redirect(url_for('home.home', buy_requests = buy_requests))

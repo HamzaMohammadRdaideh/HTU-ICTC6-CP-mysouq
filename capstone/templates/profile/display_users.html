@@ -28,7 +28,7 @@
                 <th scope="col">First name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Action</th>
+                <th scope="col">Delete-Block</th>
 
 
             </tr>
@@ -44,7 +44,7 @@
                 <td>{{user.last_name}}</td>
                 <td>{{user.email}}</td>
                 <td>
-                    <a href="{{url_for('profile.remove_user' , user_id = user.id)}}"><i class="fas fa-user-times" title="Remove-User"></i></a>
+                    <a href="{{url_for('profile.remove_user' , user_id = user.id)}}"><i class="fas fa-user-times ml-4" title="Remove-User"></i></a>
                     <a href="{{url_for('profile.disable_user_list' , user_id = user.id)}}"> <i class="fas fa-user-slash" title="Disable-User"></i></a>
                 </td>
 
@@ -53,7 +53,7 @@
 
         </tbody>
     </table>
-    <a href="{{url_for('profile.disabled_list')}}"><button type="button" class="btn btn-primary">Disabled-Users-List</button></a>
+    <a href="{{url_for('profile.disabled_list')}}"><button type="button" class="btn btn-primary">Block-Users-List</button></a>
 
    </div></div>
 </center>
