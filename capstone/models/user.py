@@ -1,6 +1,5 @@
 from mongoengine import *
 from datetime import datetime
-from .item import Item
 from passlib.hash import pbkdf2_sha256
 from bson import ObjectId
 

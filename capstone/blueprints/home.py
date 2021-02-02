@@ -46,7 +46,7 @@ def add_item():
         price = add_item_form.price.data
         category = add_item_form.category.data
 
-        new_item = Item(title = title, description = description, price = price, category = category)
+        new_item = Item(user = session['user']['id'] , title = title, description = description, price = price, category = category)
         
         new_item.save()
 

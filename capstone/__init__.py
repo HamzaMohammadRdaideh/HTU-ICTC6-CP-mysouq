@@ -76,5 +76,9 @@ def create_app(test_config=None):
     from .blueprints.profile import profile_bp
     app.register_blueprint(profile_bp)
 
+# register the 'user' blueprint
+    from .blueprints.notifications import notifications_bp
+    app.register_blueprint(notifications_bp)
+    
     return app
 

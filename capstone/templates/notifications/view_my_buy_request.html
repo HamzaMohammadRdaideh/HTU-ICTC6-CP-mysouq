@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Add-Category{% endblock %}
+
+
+
+
+{% block main %}
+
+<center>
+    <div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2><i class="{{icon}}"></i> {{title}}</h2>
+        </div>
+    </div>
+    <hr>
+
+<!-- edit user -->
+{% for item_requests in my_buy_requests  %}
+{% for request in item_requests %}
+
+<div id="b1">
+  <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="../../static/images/logi.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">
+            <h5><b>HRD-Souq.com</b></h5>
+          </h5>
+          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+          <p class="card-text">
+          <h5><b>Title : </b>{{request.user.username}}</h5>
+          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+          <h5><b>Description : </b>{{request.item.title}}</h5>
+          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+          <h5><b>Price : </b> {{request.item.price}} JDs </h5>
+          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+          </p>
+          <a href="#">Approve</a>
+          <a href="#">Decline</a>
+          
+        </div>
+      </div>
+  </div>
+</div>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+{% endfor %}
+{% endfor %}
+</center>
+
+{% endblock %}

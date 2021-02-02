@@ -9,9 +9,9 @@ from capstone.forms.items import AddCategoryForm
 profile_bp = Blueprint('profile', __name__)
 
 @profile_bp.route('/profile', methods=['POST', 'GET'])
-@login_required
-@disable_user
-@maintenance
+# @login_required
+# @disable_user
+# @maintenance
 def profile():
 
     user = User.objects(id = session["user"]['id']).first()
