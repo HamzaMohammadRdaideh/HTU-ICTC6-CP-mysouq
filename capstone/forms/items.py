@@ -10,7 +10,7 @@ class AddItemForm(FlaskForm):
 
     price = FloatField("Price: ", [validators.InputRequired()] , render_kw={"placeholder": "00.00 JDS"})
 
-    category = SelectField("Category: ", choices=[('1', 'Clothes'), ('2', 'Vehicles'), ('3', 'Digital Devices')])
+    category = SelectField(u'Category')
 
     image = FileField()
 
@@ -25,8 +25,14 @@ class EditItemForm(FlaskForm):
 
     new_price = FloatField("Price: ", [validators.InputRequired()])
 
-    new_category = SelectField("Category: ", choices=[('1', 'Clothes'), ('2', 'Vehicles'), ('3', 'Digital Devices')])
+    category = SelectField(u'Category')
 
     new_image = FileField()
 
     submit = SubmitField("Edit Item")    
+
+
+class AddCategoryForm(FlaskForm):
+    value = StringField("Category Number: ")
+    label = StringField("Category Name: ")
+    submit = SubmitField("Add Category")

@@ -28,3 +28,9 @@ class Item(Document):
     hidden = BooleanField(default = False)
 
 
+class Category(Document):
+
+    meta = {'collection' : 'Categories'}
+
+    value = StringField(required = True)
+    label = StringField(required = True)

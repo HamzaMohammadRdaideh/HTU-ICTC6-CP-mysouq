@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
-from capstone.models import User , BuyRequest ,Item , UpgradeRequest
+from capstone.models import User , BuyRequest ,Item , UpgradeRequest ,Category
 from bson.objectid import ObjectId
 from .user import disable_user , login_required , maintenance
-
+from capstone.forms.items import AddCategoryForm
 
 # define our blueprint
 profile_bp = Blueprint('profile', __name__)
@@ -123,10 +123,10 @@ def disabled_list():
 @maintenance 
 def buy_request_list(user_id):
 
-    user = User.objects()
-    list_request = BuyRequest.objects(id == user_id)
 
-    return render_template('profile/buy_request_list.html' , user = user , list_request = list_request ,title = 'Buy-Request' , icon = 'fas fa-shopping-cart')
+    list_request = BuyRequest.objects(user = session['user']['id'])
+
+    return render_template('profile/buy_request_list.html'  , list_request = list_request ,title = 'Buy-Request' , icon = 'fas fa-shopping-cart')
 
 
 
@@ -169,3 +169,31 @@ def request_upgrade():
         flash("You have already requested an upgrade.")
 
     return redirect(url_for('profile.profile'))
+
+
+@profile_bp.route('/add_category', methods=['GET', 'POST'])
+@login_required
+@disable_user
+@maintenance
+def add_category():
+
+    add_category_form = AddCategoryForm()
+
+    if add_category_form.validate_on_submit():
+
+
+        category_value = add_category_form.value.data
+        category_label = add_category_form.label.data
+
+        new_category = Category( value = category_value, label = category_label)
+
+        new_category.save()
+        
+        flash('New Category has been added.!')
+
+        return redirect(url_for("profile.profile"))
+
+    return render_template("profile/add_category.html", form = add_category_form)
+
+
+

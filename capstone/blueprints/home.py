@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
-from capstone.models import User , Item 
+from capstone.models import User , Item , Category
 from capstone.forms.items import AddItemForm , EditItemForm
 from capstone.models.request import BuyRequest
 from bson import ObjectId
@@ -35,6 +35,10 @@ def add_item():
 
     add_item_form = AddItemForm()
 
+    categories = Category.objects()
+
+    add_item_form.category.choices = [(category.value, category.label) for category in categories]
+
     if add_item_form.validate_on_submit():
 
         title = add_item_form.title.data
@@ -61,6 +65,10 @@ def edit_item(item_id):
 
     edit_item_form = EditItemForm()
 
+    categories = Category.objects()
+
+    edit_item_form.category.choices = [(category.value, category.label) for category in categories]
+
     item = Item.objects(id = item_id).first()
 
     if request.method == "GET":
@@ -68,15 +76,14 @@ def edit_item(item_id):
         edit_item_form.new_title.data = item.title
         edit_item_form.new_description.data = item.description
         edit_item_form.new_price.data = item.price
-        edit_item_form.new_category.data = item.category
-
+        edit_item_form.category.data = item.category
 
     if edit_item_form.validate_on_submit():
 
         item.title = edit_item_form.new_title.data
         item.description = edit_item_form.new_description.data
         item.price = edit_item_form.new_price.data
-        item.category = edit_item_form.new_category.data
+        item.category = edit_item_form.category.data
         
         item.save()
 
@@ -160,7 +167,7 @@ def buy_item(item_id):
 
         buy_request.save()
         
-        Item.objects(id = item_id).update_one(add_to_set__buy_requests_list = buy_request.id)
+        Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
 
     else:
         flash("Item already in you Buy-Requests.")

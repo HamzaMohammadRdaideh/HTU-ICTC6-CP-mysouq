@@ -26,14 +26,16 @@
     
     <a href="{{url_for('profile.request_upgrade')}}"><button type="button" class="btn btn-primary">Upgrade-Request-List</button></a>
 
+    <a href="{{url_for('profile.add_category')}}"><button type="button" class="btn btn-primary">Add-Category</button></a>
 
-    <a href="{{url_for('profile.maintenance_mode')}}"><button type="button" class="btn btn-primary">Maintanance-Mode</button></a>
-    <a href="{{url_for('profile.remove_maintenance_mode')}}"><button type="button" class="btn btn-primary">Remove-Maintanance-Mode</button></a>
+
+    <a href="{{url_for('profile.maintenance_mode')}}"><button type="button" class="btn btn-primary">Maintanance-On</button></a>
+    <a href="{{url_for('profile.remove_maintenance_mode')}}"><button type="button" class="btn btn-primary">Maintanance-Off</button></a>
 
     <a href="{{url_for('profile.buy_request_list' , user_id = user.id)}}"><button type="button" class="btn btn-primary">Your-Buy-Requests</button></a>
 
     <br> <br>
-
+    
     <div class="card" style="width: 18rem;">
         <img src="../../static/images/136.png" class="card-img-top" alt="...">
         <div class="card-body">

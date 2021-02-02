@@ -28,10 +28,13 @@
 
 
   {% for item in items %}
+  
+
+
   <div class="card" style="width: 18rem;">
 
     <ol class="mr-5">
-      <a href="{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-heart" title="Favorite"></i></a>
+      <a href="{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
       <a href="{{url_for('home.edit_item' , item_id = item.id)}}"><i class="far fa-edit" title="Edit"></i></a>
       <a href="{{url_for('home.delete_item' , item_id = item.id)}}"><i class="fas fa-trash-alt" title="Delete"></i></a>
     </ol>
@@ -69,12 +72,14 @@
   </div>
   <hr style="height:2px;border-width:0;color:gray;background-color:gray">
   <br>
+  
+  
   {% endfor %}
 
 
-  
+  {% if not items %}
   <P>No Items, Do You Want To ADD An Item?<a href="{{url_for('home.add_item')}}"> Add-Item</a> </P>
- 
+ {% endif %}
 </center>
 
 {% endblock %}
