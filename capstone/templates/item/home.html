@@ -28,15 +28,18 @@
 
 
   {% for item in items %}
-  
+
 
 
   <div class="card" style="width: 18rem;">
 
     <ol class="mr-5">
+      {% if session ['user']['role'] == 0 %}
       <a href="{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
+      {% elif session ['user']['role'] == 1 or session ['user']['role'] == 2 %}
       <a href="{{url_for('home.edit_item' , item_id = item.id)}}"><i class="far fa-edit" title="Edit"></i></a>
       <a href="{{url_for('home.delete_item' , item_id = item.id)}}"><i class="fas fa-trash-alt" title="Delete"></i></a>
+      {% endif %}
     </ol>
 
     <img class="card-img-top" src="../../static/images/logi.png" alt="Card image cap">
@@ -48,20 +51,21 @@
       </h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
       <p class="card-text">
-      <h5><b>Title : </b>{{item.title}}</h5>
+      <h5>Title : </b>{{item.title}}</h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-      <h5><b>Description : </b>{{item.description}}</h5>
+      <h5>Description : </b>{{item.description}}</h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-      <h5><b>Price : </b> {{item.price}} JDs </h5>
+      <h5>Price : </b> {{item.price}} JDs </h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-      <h5><b>Cateogory : </b> {{item.category}} </h5>
+      <h5>Cateogory : </b> {{item.category}} </h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-      <h5><b>Cateogory : </b> {{item.date}} </h5>
+      <h5>Cateogory : </b> {{item.date}} </h5>
       <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <h5>Seller's name : </b> {{item.user.first_name}} </h5>
       </p>
       
       
-        {% if request %}
+        {% if session['user']['role'] == 0 %}
         <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
         {% else %}
         <a class="btn btn-primary text-white disabled">Buy</a>
@@ -72,7 +76,6 @@
   </div>
   <hr style="height:2px;border-width:0;color:gray;background-color:gray">
   <br>
-  
   
   {% endfor %}
 

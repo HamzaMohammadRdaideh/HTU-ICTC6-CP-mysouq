@@ -32,6 +32,8 @@
               <p class="card-text">
               <h5><b>Username : </b>{{request.user.username}}</h5>
               <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+              <h5><b>Name : </b> {{request.user.first_name | title}} {{request.user.last_name | title}} </h5>
+              <hr style="height:2px;border-width:0;color:gray;background-color:gray">
               <h5><b>Status : </b> {{request.status}}  </h5>
               <hr style="height:2px;border-width:0;color:gray;background-color:gray">
               </p>

@@ -142,15 +142,27 @@ def search_items():
 
 
 @home_bp.route('/item/<item_id>/favorite')
-@login_required
-@disable_user
-@maintenance
+# @login_required
+# @disable_user
+# @maintenance
 def add_favorite(item_id):
 
     # Add post ID to favorites list
     User.objects(id = session['user']['id']).update_one(add_to_set__favorite = item_id)
     flash("Added as favorite !:)")
     return redirect(url_for('home.home'))          
+
+
+
+@home_bp.route('/item/<item_id>/remove_favorite')
+# @login_required
+# @disable_user
+# @maintenance
+def remove_from_favorite(item_id):
+
+    User.objects(id = session['user']['id']).update_one(pull__favorite = item_id)
+    flash("Removed from favorite !:)")
+    return redirect(url_for('profile.profile'))          
 
 
 @home_bp.route('/item/<item_id>/buy')

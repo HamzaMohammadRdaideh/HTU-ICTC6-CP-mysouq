@@ -9,9 +9,9 @@ from capstone.forms.items import AddCategoryForm
 profile_bp = Blueprint('profile', __name__)
 
 @profile_bp.route('/profile', methods=['POST', 'GET'])
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def profile():
 
     user = User.objects(id = session["user"]['id']).first()
@@ -131,9 +131,9 @@ def buy_request_list(user_id):
 
 
 @profile_bp.route('/user/favorite_list', methods=['GET', 'POST'])
-@login_required
-@disable_user
-@maintenance 
+# @login_required
+# @disable_user
+# @maintenance 
 def view_favorite():
 
     favorite_items = User.objects(id = session['user']['id']).get().favorite
@@ -150,25 +150,25 @@ def view_favorite():
     return render_template("profile/user_favorite_items.html" , items = items , title = 'Favorites-Items' , icon = 'fas fa-star')
 
 
-@profile_bp.route('/request_upgrade', methods=['GET', 'POST'])
-@login_required
-@disable_user
-@maintenance 
-def request_upgrade():
+# @profile_bp.route('/request_upgrade', methods=['GET', 'POST'])
+# @login_required
+# @disable_user
+# @maintenance 
+# def request_upgrade():
 
-    request = UpgradeRequest.objects(user = session['user']['id']).first()
+#     request = UpgradeRequest.objects(user = session['user']['id']).first()
 
-    if not request:
+#     if not request:
 
-        upgrade_request = UpgradeRequest(user = session['user']['id'], status = "Pending")
+#         upgrade_request = UpgradeRequest(user = session['user']['id'], status = "Pending")
 
-        upgrade_request.save()
+#         upgrade_request.save()
 
-    else:
+#     else:
 
-        flash("You have already requested an upgrade.")
+#         flash("You have already requested an upgrade.")
 
-    return redirect(url_for('profile.profile'))
+#     return redirect(url_for('profile.profile'))
 
 
 @profile_bp.route('/add_category', methods=['GET', 'POST'])

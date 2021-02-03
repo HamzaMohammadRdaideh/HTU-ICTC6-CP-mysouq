@@ -91,10 +91,23 @@
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('profile.profile')}}">Profile</a>
           </li>
+          
+
+          {% if session['user']['role'] == 2 %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('notifications.review_upgrade_requests')}}">Notifications</a>
+          </li>
+          {% elif session['user']['role'] == 1 %}
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('notifications.view_buy_request')}}">Notifications</a>
           </li>
-        
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('profile.buy_request_list' , user_id = session['user']['id'])}}">Notifications</a>
+          </li>
+          {% endif %}
+
+
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
