@@ -42,7 +42,7 @@
       {% if session ['user']['role'] == 0 %}
       <a href="{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
       {% elif session ['user']['role'] == 1 or session ['user']['role'] == 2 %}
-      <a href="{{url_for('home.edit_item' , item_id = item.id)}}"><i class="far fa-edit" title="Edit"></i></a>
+      <a href="{{url_for('home.edit_item' , item_id = item.id , user_id = session['user']['id'])}}"><i class="far fa-edit" title="Edit"></i></a>
       <a href="{{url_for('home.delete_item' , item_id = item.id , user_id = session['user']['id'])}}"><i class="fas fa-trash-alt" title="Delete"></i></a>
       {% endif %}
     </ol>

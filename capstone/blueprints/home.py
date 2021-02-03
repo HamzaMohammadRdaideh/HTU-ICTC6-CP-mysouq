@@ -57,11 +57,11 @@ def add_item():
     return render_template("item/add_item.html", form = add_item_form , title = 'Add-Item' , icon="fa fa-upload")
 
 
-@home_bp.route('/user/edit_item/<item_id>', methods=['GET', 'POST'])
+@home_bp.route('/user/<user_id>/edit_item/<item_id>', methods=['GET', 'POST'])
 @login_required
 @disable_user
 @maintenance
-def edit_item(item_id):
+def edit_item(user_id,item_id):
 
     edit_item_form = EditItemForm()
 
@@ -80,16 +80,27 @@ def edit_item(item_id):
 
     if edit_item_form.validate_on_submit():
 
-        item.title = edit_item_form.new_title.data
-        item.description = edit_item_form.new_description.data
-        item.price = edit_item_form.new_price.data
-        item.category = edit_item_form.category.data
-        
-        item.save()
+        item = Item.objects(id = item_id).first() 
+        item_user = item.user
+        user = User.objects(id = user_id).first()
 
-        flash("Your item has been successfully edit.")
+        if user == item_user :
+            item.title = edit_item_form.new_title.data
+            item.description = edit_item_form.new_description.data
+            item.price = edit_item_form.new_price.data
+            item.category = edit_item_form.category.data
+            
+            item.save()
 
-        return redirect(url_for('home.home'))
+            flash("Your item has been successfully edit.")
+
+            return redirect(url_for('home.home'))
+
+        else: 
+            flash('Not allowed')
+
+        return redirect(url_for("home.home"))  
+
 
     return render_template("item/edit_item.html", form = edit_item_form , title = 'Edit-Item' , icon = 'far fa-edit')    
 
