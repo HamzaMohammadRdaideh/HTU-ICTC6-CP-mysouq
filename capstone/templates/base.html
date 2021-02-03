@@ -82,7 +82,7 @@
 
           {% if session ['user'] %}
 
-          
+
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('home.home')}}">Home
             </a>
@@ -91,7 +91,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('profile.profile')}}">Profile</a>
           </li>
-          
+
 
           {% if session['user']['role'] == 2 %}
           <li class="nav-item">
@@ -103,7 +103,8 @@
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('profile.buy_request_list' , user_id = session['user']['id'])}}">Notifications</a>
+            <a class="nav-link"
+              href="{{url_for('profile.buy_request_list' , user_id = session['user']['id'])}}">Notifications</a>
           </li>
           {% endif %}
 
@@ -115,35 +116,40 @@
               Account-Settings
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{url_for('user.edit_profile_user')}}"><i class="fas fa-user-edit"></i> Edit-Profile</a>
+              <a class="dropdown-item" href="{{url_for('user.edit_profile_user')}}"><i class="fas fa-user-edit"></i>
+                Edit-Profile</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{url_for('user.change_password')}}"><i class="fas fa-key"></i> Change-Password</a>
+              <a class="dropdown-item" href="{{url_for('user.change_password')}}"><i class="fas fa-key"></i>
+                Change-Password</a>
             </div>
           </li>
-          {% endif %} 
+          {% endif %}
         </ul>
 
         <ul class="navbar-nav ml-auto topnav">
           {% if not session ['user'] %}
 
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('signup.signup')}}" >Sign-Up <i class="fas fa-user-plus" title="Sign-Up"></i>
+            <a class="nav-link" href="{{url_for('signup.signup')}}">Sign-Up <i class="fas fa-user-plus"
+                title="Sign-Up"></i>
             </a>
           </li>
-          
+
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('login.login')}}" >Log-In <i class="fas fa-sign-in-alt"  title="Log-In"></i></i>
+            <a class="nav-link" href="{{url_for('login.login')}}">Log-In <i class="fas fa-sign-in-alt"
+                title="Log-In"></i></i>
             </a>
           </li>
-          {% endif %} 
+          {% endif %}
 
 
           {% if session ['user'] %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('login.logout')}}">Log-Out <i class="fas fa-sign-out-alt" title="Log-Out"></i>
+            <a class="nav-link" href="{{url_for('login.logout')}}">Log-Out <i class="fas fa-sign-out-alt"
+                title="Log-Out"></i>
             </a>
           </li>
-          {% endif %} 
+          {% endif %}
 
         </ul>
       </div>
@@ -154,7 +160,7 @@
 
   <!-- main -->
   <main class="mt-5">
-    
+
     <!-- notification section -->
     <section class="container my-5">
       {% for message in get_flashed_messages() %}
@@ -173,10 +179,21 @@
       {%endblock%}
     </section>
   </main>
+  <br><br>
+  <br><br>
 
-  <!-- footer block -->
   {% block footer%}
+  
+  <footer class="text-muted py-4 bg-light" style="padding: 20px; position: relative; left: 0; bottom: 0; width: 100%; ">
+    <div class="container">
 
+      <center>
+        <p class="mb-1 text-muted" style="color: black;">HRD-Souq is a simple website souq written in Flask and uses WTForms, Bootstrap, and
+          MongoEngine.</p>
+        <p class="mb-1 text-muted">By : Hamza Mohammad Rdaideh :)</p>
+      </center>
+    </div>
+  </footer>
   {% endblock %}
 
   <!-- importing our scripts -->

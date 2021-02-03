@@ -26,8 +26,10 @@ def profile():
 def display_users():
 
     users = User.objects()
-
-    return render_template('profile/display_users.html' , users = users , title = 'All-Users' , icon = 'fas fa-users')
+    items = Item.objects()
+    seller_user = User.objects(role = 1)
+    buyer_user = User.objects(role = 0)
+    return render_template('profile/display_users.html', buyer_user = buyer_user , seller_user = seller_user , users = users , items = items , title = 'All-Users' , icon = 'fas fa-users')
 
 
 @profile_bp.route('/remove_user/<user_id>', methods=['POST', 'GET'])
@@ -131,9 +133,9 @@ def buy_request_list(user_id):
 
 
 @profile_bp.route('/user/favorite_list', methods=['GET', 'POST'])
-# @login_required
-# @disable_user
-# @maintenance 
+@login_required
+@disable_user
+@maintenance 
 def view_favorite():
 
     favorite_items = User.objects(id = session['user']['id']).get().favorite

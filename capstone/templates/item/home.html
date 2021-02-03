@@ -21,13 +21,18 @@
   </form>
 
   <hr>
-    <a href="{{url_for('home.add_item')}}"> <button type="button" class="btn btn-primary">Add-Item</button></a>
-    <a href="{{url_for('home.sort_price_items')}}"><button type="button" class="btn btn-primary">Sort By Price</button></a>
-    <a href="{{url_for('home.sort_date_items')}}"><button type="button" class="btn btn-primary">Sort By Date</button></a>
+  {% if session['user']['role'] == 1 or session['user']['role'] == 2 %}
+  <a href="{{url_for('home.add_item')}}"> <button type="button" class="btn btn-primary">Add-Item</button></a>
+  {% endif %}
+  <a href="{{url_for('home.sort_price_items')}}"><button type="button" class="btn btn-primary">Sort By
+      Price</button></a>
+  <a href="{{url_for('home.sort_date_items')}}"><button type="button" class="btn btn-primary">Sort By Date</button></a>
   <br> <br>
 
-
+  <div class="container">
+    <div class="row align-items-start">
   {% for item in items %}
+  <div class="col">
 
 
 
@@ -38,7 +43,7 @@
       <a href="{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
       {% elif session ['user']['role'] == 1 or session ['user']['role'] == 2 %}
       <a href="{{url_for('home.edit_item' , item_id = item.id)}}"><i class="far fa-edit" title="Edit"></i></a>
-      <a href="{{url_for('home.delete_item' , item_id = item.id)}}"><i class="fas fa-trash-alt" title="Delete"></i></a>
+      <a href="{{url_for('home.delete_item' , item_id = item.id , user_id = session['user']['id'])}}"><i class="fas fa-trash-alt" title="Delete"></i></a>
       {% endif %}
     </ol>
 
@@ -47,42 +52,48 @@
       <h5 class="card-title">
         <h5
           style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-          <b> HRD-Souq</b></h5>
+          <b> HRD-Souq</b>
+        </h5>
       </h5>
-      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
       <p class="card-text">
       <h5>Title : </b>{{item.title}}</h5>
-      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
       <h5>Description : </b>{{item.description}}</h5>
-      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
       <h5>Price : </b> {{item.price}} JDs </h5>
-      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
       <h5>Cateogory : </b> {{item.category}} </h5>
-      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
       <h5>Cateogory : </b> {{item.date}} </h5>
-      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-      <h5>Seller's name : </b> {{item.user.first_name}} </h5>
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+      <h5>Seller : </b> {{item.user.first_name | title}} {{item.user.last_name | title}} </h5>
       </p>
-      
-      
-        {% if session['user']['role'] == 0 %}
-        <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
-        {% else %}
-        <a class="btn btn-primary text-white disabled">Buy</a>
-        {% endif %}
+      <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+
+      {% if session['user']['role'] == 0 %}
+      <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
+      {% else %}
+      <a class="btn btn-primary text-white disabled">Buy</a>
+      {% endif %}
 
 
     </div>
   </div>
-  <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  <hr style="height:1px;border-width:0;color:gray;background-color:gray">
   <br>
-  
-  {% endfor %}
+
+</div>
+
+{% endfor %}
+
+
+  </div></div>
 
 
   {% if not items %}
   <P>No Items, Do You Want To ADD An Item?<a href="{{url_for('home.add_item')}}"> Add-Item</a> </P>
- {% endif %}
+  {% endif %}
 </center>
 
 {% endblock %}

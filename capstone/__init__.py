@@ -32,7 +32,7 @@ def create_app(test_config=None):
 
         user_2 = User(username='hamza_96',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'hamza@gmail.com' , role = 0 , first_name='hamza', last_name='rdaideh').save()
 
-        user_3 = User(username='reema_95',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'reema@gmail.com' , role = 0, first_name='Admin', last_name='eilouti').save()
+        user_3 = User(username='reema_95',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'reema@gmail.com' , role = 0, first_name='reema', last_name='eilouti').save()
 
         user_4 = User(username='hesham_94',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'hesham@gmail.com' , role = 1, first_name='hesham', last_name='marei').save()
 

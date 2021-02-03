@@ -15,9 +15,9 @@ home_bp = Blueprint('home', __name__)
 
 
 @home_bp.route('/home', methods=['POST', 'GET'])
-@login_required
-@disable_user
-@maintenance
+# @login_required
+# @disable_user
+# @maintenance
 def home():
 
     user = User.objects()
@@ -94,21 +94,29 @@ def edit_item(item_id):
     return render_template("item/edit_item.html", form = edit_item_form , title = 'Edit-Item' , icon = 'far fa-edit')    
 
     
-@home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])
-@login_required
-@disable_user
-@maintenance
-def delete_item(item_id):
+@home_bp.route('/user/<user_id>/delete_item/<item_id>', methods=['GET', 'POST'])
+# @login_required
+# @disable_user
+# @maintenance
+def delete_item(user_id ,item_id):
 
-    Item.objects(id = item_id).first().delete()
+    item = Item.objects(id = item_id).first() 
+    item_user = item.user
+    user = User.objects(id = user_id).first()
+
+    if user == item_user :
+        Item.objects(id = item_id , user = user_id).first().delete()
+        flash('Item has been deleted')
+    else: 
+        flash('Not allowed')
 
     return redirect(url_for("home.home"))  
 
 
 @home_bp.route('/sort-item/date', methods=['GET', 'POST'])
-@login_required
-@disable_user
-@maintenance
+# @login_required
+# @disable_user
+# @maintenance
 def sort_date_items():
 
     items = Item.objects.order_by('-date')
@@ -117,9 +125,9 @@ def sort_date_items():
 
 
 @home_bp.route('/sort-item/price', methods=['GET', 'POST'])
-@login_required
-@disable_user
-@maintenance
+# @login_required
+# @disable_user
+# @maintenance
 def sort_price_items():
 
     items = Item.objects.order_by('-price')
@@ -142,9 +150,9 @@ def search_items():
 
 
 @home_bp.route('/item/<item_id>/favorite')
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def add_favorite(item_id):
 
     # Add post ID to favorites list
@@ -155,9 +163,9 @@ def add_favorite(item_id):
 
 
 @home_bp.route('/item/<item_id>/remove_favorite')
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def remove_from_favorite(item_id):
 
     User.objects(id = session['user']['id']).update_one(pull__favorite = item_id)
