@@ -19,6 +19,7 @@ class Item(Document):
 
 
     # define class fields
+    user = ReferenceField(User)
     title = StringField(required = True)
     description = StringField(required = True)
     date = DateTimeField(default = datetime.now())
@@ -27,7 +28,6 @@ class Item(Document):
     category = StringField(required = True)
     buy_request_list = ListField(StringField())
     hidden = BooleanField(default = False)
-    user = ReferenceField(User)
 
 class Category(Document):
 

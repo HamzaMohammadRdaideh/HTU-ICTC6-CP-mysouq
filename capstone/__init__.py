@@ -34,16 +34,16 @@ def create_app(test_config=None):
 
         user_3 = User(username='reema_95',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'reema@gmail.com' , role = 0, first_name='Admin', last_name='eilouti').save()
 
-        user_4 = User(username='hesham_94',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'hesham@gmail.com' , role = 0, first_name='hesham', last_name='marei').save()
+        user_4 = User(username='hesham_94',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'hesham@gmail.com' , role = 1, first_name='hesham', last_name='marei').save()
 
         user_5 = User(username='disable',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'disable@gmail.com' , role = 0, first_name='disable', last_name='disable' , disable = True).save()
 
 
-        item_1 = Item(title = "First", description = 'First' ,date = "2009-12-30 14:09:01", price = "0" , category = "clothes").save()
+        item_1 = Item(user = user_4 , title = "First", description = 'First' ,date = "2009-12-30 14:09:01", price = "0" , category = "clothes").save()
 
-        item_2 = Item(title = "Sec" , description = 'First' ,date = "2020-12-30 14:09:01", price = "0" , category = "clothes").save()
+        item_2 = Item(user = user_4 , title = "Sec" , description = 'First' ,date = "2020-12-30 14:09:01", price = "0" , category = "clothes").save()
 
-        item_3 = Item(title = "Third", description = 'First' ,date = "2011-12-30 14:09:01", price = "0" , category = "clothes").save()
+        item_3 = Item(user = user_4 , title = "Third", description = 'First' ,date = "2011-12-30 14:09:01", price = "0" , category = "clothes").save()
 
 
         category_1 = Category(value = '1', label = 'Clothes').save()

@@ -169,6 +169,9 @@ def buy_item(item_id):
         
         Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
 
+        flash("A Buy Requests has been Sent. !:)")
+
+
     else:
         flash("Item already in you Buy-Requests.")
 

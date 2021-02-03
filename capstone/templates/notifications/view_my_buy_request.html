@@ -8,19 +8,19 @@
 {% block main %}
 
 <center>
-    <div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <h2><i class="{{icon}}"></i> {{title}}</h2>
-        </div>
+  <div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <h2><i class="{{icon}}"></i> {{title}}</h2>
     </div>
-    <hr>
+  </div>
+  <hr>
 
-<!-- edit user -->
-{% for item_requests in my_buy_requests  %}
-{% for request in item_requests %}
+  <!-- edit user -->
+  {% for item_requests in my_buy_requests %}
+  {% for request in item_requests %}
 
-<div id="b1">
-  <div class="col-lg-4 col-md-6 col-sm-12">
+  <div id="b1">
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="../../static/images/logi.png" alt="Card image cap">
         <div class="card-body">
@@ -29,23 +29,30 @@
           </h5>
           <hr style="height:2px;border-width:0;color:gray;background-color:gray">
           <p class="card-text">
-          <h5><b>Title : </b>{{request.user.username}}</h5>
+          <h5><b>Title : </b>{{request.user.title}}</h5>
           <hr style="height:2px;border-width:0;color:gray;background-color:gray">
           <h5><b>Description : </b>{{request.item.title}}</h5>
           <hr style="height:2px;border-width:0;color:gray;background-color:gray">
           <h5><b>Price : </b> {{request.item.price}} JDs </h5>
           <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+          <h5><b>Price : </b> {{request.status}} JDs </h5>
+          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
           </p>
-          <a href="#">Approve</a>
-          <a href="#">Decline</a>
-          
+
+
+          <a href="{{url_for('notifications.approve_buy_request' ,item_id = request.item.id , request_id = request.id)}}"
+            class="btn btn-primary text-white">Approve</a>
+
+          <a href="{{url_for('notifications.decline_request' ,item_id = request.item.id , request_id = request.id)}}"
+            class="btn btn-warning text-white">Decline</a>
+
         </div>
       </div>
+    </div>
   </div>
-</div>
-<hr style="height:2px;border-width:0;color:gray;background-color:gray">
-{% endfor %}
-{% endfor %}
+  <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  {% endfor %}
+  {% endfor %}
 </center>
 
 {% endblock %}
