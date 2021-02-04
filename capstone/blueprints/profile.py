@@ -13,7 +13,7 @@ profile_bp = Blueprint('profile', __name__)
 @disable_user
 @maintenance
 def profile():
-
+    """This function displays the logged in user's information."""
     user = User.objects(id = session["user"]['id']).first()
 
     return render_template('profile/profile.html' , user = user)
@@ -24,6 +24,9 @@ def profile():
 @disable_user
 @maintenance
 def display_users():
+    """This function is for the Admin only (if statement in the template)
+    It lets them preview all the users and their status.
+    Also, it allows the admin to Delete or Disable any user(s)."""
 
     users = User.objects()
     items = Item.objects()
@@ -37,7 +40,7 @@ def display_users():
 @disable_user
 @maintenance
 def remove_user(user_id):
-
+    """This function removes the user specified from the database."""
     
     user = User.objects(id = user_id).first()
     user.delete()
@@ -52,7 +55,9 @@ def remove_user(user_id):
 @disable_user
 @maintenance    
 def disable_user_list(user_id) :
-    
+    """This function sets the "disable" attribute of the user to "True".
+    Such user can't access anything on the site (because of the decorator)."""
+
     user = User.objects(id = user_id).first()
     
     user.disable = True
@@ -70,7 +75,8 @@ def disable_user_list(user_id) :
 @disable_user
 @maintenance    
 def unlock_disable_user_user_list(user_id) :
-    
+    """This function sets the "disable" attribute of the user to "False".
+    Such user can now use the site as usual with no restrictions."""    
     user = User.objects(id = user_id).first()
     
     user.disable = False
@@ -88,6 +94,8 @@ def unlock_disable_user_user_list(user_id) :
 @disable_user
 @maintenance    
 def maintenance_mode() :
+    """This function sets the "maintenance" attribute of all users to "True".
+    All users will see the Maintenance Page when trying to access any page on the site."""
 
     User.objects(role = 0 and 1).update(maintenance = True) 
     flash('The Website now in Maintenance!')
@@ -100,7 +108,9 @@ def maintenance_mode() :
 @disable_user
 @maintenance    
 def remove_maintenance_mode() :
-    
+    """This function sets the "maintenance" attribute of all users to "False".
+    All users will be able to access any page on the site normally."""
+
     User.objects(role = 0 and 1).update(maintenance = False) 
 
     flash('The Website now on!')
@@ -113,7 +123,7 @@ def remove_maintenance_mode() :
 @disable_user
 @maintenance  
 def disabled_list():
-
+    """This function can be accessed by the Admin user to view which users they have locked(disable)."""
     users = User.objects(disable = True)
 
     return render_template('profile/blocked_list.html' , users = users, title = "Blocked-List" , icon = 'fas fa-users')
@@ -124,7 +134,7 @@ def disabled_list():
 @disable_user
 @maintenance 
 def buy_request_list(user_id):
-
+    """This function is accessed by the Buyer user to view their Buy Requests and their status."""
 
     list_request = BuyRequest.objects(user = session['user']['id'])
 
@@ -137,7 +147,7 @@ def buy_request_list(user_id):
 @disable_user
 @maintenance 
 def view_favorite():
-
+    """This function lets the Buyer user see their favorited items."""
     favorite_items = User.objects(id = session['user']['id']).get().favorite
 
     items = []
@@ -178,6 +188,8 @@ def view_favorite():
 @disable_user
 @maintenance
 def add_category():
+    """This function is accessed by the Admin only, it lets them add a new category for items.
+    The changes made here can be viewed when a Seller user chooses a category when adding a new item."""
 
     add_category_form = AddCategoryForm()
 

@@ -9,7 +9,7 @@ signup_bp = Blueprint('signup', __name__)
 
 @signup_bp.route("/signup" , methods = ['POST' , 'GET'])
 def signup():
-
+    """This function creates an account for a new user."""
     # created an instance of our form
     signup_form = SignUpForm()
 

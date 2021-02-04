@@ -19,9 +19,9 @@ home_bp = Blueprint('home', __name__)
 @disable_user
 @maintenance
 def home():
-
+    """ This function is display unsold item """
     user = User.objects()
-    items = Item.objects()
+    items = Item.objects(sold = False)
 
     return render_template('item/home.html' ,user = user ,items = items)
 
@@ -32,7 +32,7 @@ def home():
 @disable_user
 @maintenance
 def add_item():
-
+    """This function is available for the Seller User, it provides them with a form to add an item for sale."""
     add_item_form = AddItemForm()
 
     categories = Category.objects()
@@ -62,7 +62,9 @@ def add_item():
 @disable_user
 @maintenance
 def edit_item(user_id,item_id):
-
+    """This function is available for the Seller User, it provides them with a form to edit an item of theirs.
+    Another Seller user can try to edit an item that is not theirs but will be flashed by a message preventing them to do so."""
+    
     edit_item_form = EditItemForm()
 
     categories = Category.objects()
@@ -110,6 +112,9 @@ def edit_item(user_id,item_id):
 @disable_user
 @maintenance
 def delete_item(user_id ,item_id):
+    """This function is available for the Seller User, it allows them to delete an item of theirs.
+    Another Seller user can try to delete an item that is not theirs but will be flashed by a message preventing them to do so."""
+
 
     item = Item.objects(id = item_id).first() 
     item_user = item.user
@@ -129,7 +134,7 @@ def delete_item(user_id ,item_id):
 @disable_user
 @maintenance
 def sort_date_items():
-
+    """This function brings items from the database ordered descendingly by the date of their addition for the user to view."""
     items = Item.objects.order_by('-date')
 
     return render_template("item/home.html" , items = items)        
@@ -140,7 +145,8 @@ def sort_date_items():
 @disable_user
 @maintenance
 def sort_price_items():
-
+    """This function brings items from the database ordered descendingly by their price for the user to view."""
+   
     items = Item.objects.order_by('-price')
 
     return render_template("item/home.html" , items = items)    
@@ -151,7 +157,9 @@ def sort_price_items():
 @disable_user
 @maintenance
 def search_items():
-    
+    """This function is used when a user searches for a word; it can either be in the title or description.
+    If the word was in the title of an item and the description of another, the priority is for the title."""
+
     if request.method == 'POST':
         
         search_keyword = str(request.form['search_keyword'])  
@@ -165,8 +173,8 @@ def search_items():
 @disable_user
 @maintenance
 def add_favorite(item_id):
+    """This function lets a Buyer user add items to the Favorites List."""
 
-    # Add post ID to favorites list
     User.objects(id = session['user']['id']).update_one(add_to_set__favorite = item_id)
     flash("Added as favorite !:)")
     return redirect(url_for('home.home'))          
@@ -178,6 +186,7 @@ def add_favorite(item_id):
 @disable_user
 @maintenance
 def remove_from_favorite(item_id):
+    """This function lets a Buyer user remove items from the Favorites List."""
 
     User.objects(id = session['user']['id']).update_one(pull__favorite = item_id)
     flash("Removed from favorite !:)")
@@ -189,6 +198,7 @@ def remove_from_favorite(item_id):
 @disable_user
 @maintenance
 def buy_item(item_id):
+    """This function allows a Buyer user to send a Buy Request to the seller of an item to be reviewed."""
 
     request = BuyRequest.objects(user = session['user']['id'], item = item_id).first()
 

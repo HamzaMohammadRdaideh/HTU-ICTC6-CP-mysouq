@@ -10,7 +10,7 @@ login_bp = Blueprint('login', __name__)
 @login_bp.route("/" , methods = ['POST' , 'GET'])
 @login_bp.route('/login', methods=['POST', 'GET'])
 def login():
-
+    """This function validates the user's login credentials then takes them to the Home page."""
     # created an instance of our form
     login_form = LoginForm()
 
@@ -43,13 +43,15 @@ def login():
 
 @login_bp.route('/session')
 def show_session():
+    """This function prints out the Session dictionary.
+    This is only accessable through the URL and is used by the site developers for testing."""
     return dict(session)
 
 
 @login_bp.route('/logout')
 def logout():
-
-    # pop 'uid' from session
+    """This function removes the logged in user's information from the Session dictionary."""
+    # clear all data from session
     session.clear()
 
     # redirect to index
