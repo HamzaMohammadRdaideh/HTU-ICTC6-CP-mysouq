@@ -15,6 +15,7 @@ $ flask run
 2-seller -> role = 1
 3-Admin -> Password = 1234 , -> role = 2
 
+-To display DataBase localhost:8081
 -To initialize the DataBase using this route -> '/init-db'
 
 **********************************************************
