@@ -12,6 +12,8 @@ notifications_bp = Blueprint('notifications', __name__)
 @login_required
 @disable_user
 def view_buy_request():
+    """This function is accessed by the Seller user to display the Buy Requests on their items.
+    There they can choose to Approve or Decline a request."""
 
     current_user = User.objects(id = session['user']['id']).first()
     my_items = Item.objects(user = current_user)
@@ -46,7 +48,6 @@ def approve_buy_request(item_id,request_id):
     return redirect(url_for('notifications.view_buy_request'))
 
 
-
 @notifications_bp.route('/notification/<item_id>/decline_request/<request_id>', methods=['POST', 'GET'])
 @maintenance
 @login_required
@@ -65,8 +66,6 @@ def decline_request(item_id,request_id):
     return redirect(url_for('notifications.view_buy_request'))
 
 
-
-
 @notifications_bp.route('/upgrade_request', methods=['POST', 'GET'])
 @maintenance
 @login_required
@@ -82,7 +81,6 @@ def upgrade_request():
     flash("Upgrade Request has been sent.")
 
     return redirect(url_for("profile.profile"))
-
 
 
 @notifications_bp.route('/review_upgrade_requests', methods=['POST', 'GET'])

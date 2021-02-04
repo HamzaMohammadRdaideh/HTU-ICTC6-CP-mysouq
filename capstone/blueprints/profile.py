@@ -97,7 +97,8 @@ def maintenance_mode() :
     """This function sets the "maintenance" attribute of all users to "True".
     All users will see the Maintenance Page when trying to access any page on the site."""
 
-    User.objects(role = 0 and 1).update(maintenance = True) 
+    User.objects(role = 1).update(maintenance = True) 
+    User.objects(role = 0 ).update(maintenance = True)
     flash('The Website now in Maintenance!')
 
     return redirect(url_for('profile.profile'))
@@ -111,8 +112,9 @@ def remove_maintenance_mode() :
     """This function sets the "maintenance" attribute of all users to "False".
     All users will be able to access any page on the site normally."""
 
-    User.objects(role = 0 and 1).update(maintenance = False) 
-
+    User.objects(role = 0 ).update(maintenance = False) 
+    User.objects(role = 1 ).update(maintenance = False) 
+    
     flash('The Website now on!')
     
     return redirect(url_for('profile.profile'))
