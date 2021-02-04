@@ -6,8 +6,9 @@
 {% block main %}
 
 <!-- edit user -->
-
 <center>
+{% if session['user']['role'] == 2 %} 
+
 
     <div>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -17,9 +18,9 @@
             Users : {{users | count}} - Buyer : {{buyer_user | count}} - Seller : {{seller_user | count}} - Items : {{items | count}}
           </div>
     </div>
-</center>
 
-<center>
+
+
     <br>
     <div id="b1">
         <div class="col-lg-10 col-md-6 col-lg">
@@ -61,5 +62,14 @@
     <br><br>
 
    </div></div>
+
+
+
+{% else %}
+<br>
+<div class="alert alert-warning" role="alert">
+    You're not allowed to see this! back to your profile?<a href="{{url_for('profile.profile')}}"> Your-Profile </a>
+  </div>
+{% endif %}
 </center>
 {% endblock %}

@@ -8,16 +8,15 @@
 <!-- edit user -->
 
 <center>
-
+  {% if session['user']['role'] == 0 %}
   <div>
     <div class="col-lg-4 col-md-6 col-sm-12">
       <h2><i class="{{icon}}"></i> {{title}}</h2>
     </div>
   </div>
   <hr>
-</center>
 
-<center>
+
   <br>
 
   <div class="container">
@@ -68,6 +67,15 @@
   {% endif %}
   </div>
   </div>
+
+
+    
+  {% else %}
+  <br>
+  <div class="alert alert-warning" role="alert">
+      You're not allowed to see this! back to your profile?<a href="{{url_for('profile.profile')}}"> Your-Profile </a>
+  </div>
+  {% endif %}
 </center>
 <br><br>
 {% endblock %}

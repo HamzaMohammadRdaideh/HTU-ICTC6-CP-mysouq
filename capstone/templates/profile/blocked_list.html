@@ -6,62 +6,73 @@
 {% block main %}
 
 <!-- edit user -->
+<center>{% if session['user']['role'] == 2 %}
 
-<center>
+
 
     <div>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <h2><i class="{{icon}}"></i> {{title}}</h2>
         </div>
     </div>
-</center>
 
-<center>
     <br>
     <div id="b1">
         <div class="col-lg-10 col-md-6 col-lg">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">{{users | count}} - Users</th>
-                <th scope="col">Username</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Action</th>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{users | count}} - Users</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
 
 
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
 
 
-                <th scope="row">{{loop.index}}</th>
-                <td>{{user.username}}</td>
-                <td>{{user.first_name}}</td>
-                <td>{{user.last_name}}</td>
-                <td>{{user.email}}</td>
-                <td>
-                    <a href="{{url_for('profile.unlock_disable_user_user_list' , user_id = user.id)}}"> <i class="fas fa-unlock ml-3" title="Unlock"></i></a>
-                </td>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{user.username}}</td>
+                        <td>{{user.first_name}}</td>
+                        <td>{{user.last_name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                            <a href="{{url_for('profile.unlock_disable_user_user_list' , user_id = user.id)}}"> <i
+                                    class="fas fa-unlock ml-3" title="Unlock"></i></a>
+                        </td>
 
-            </tr>
-            {% endfor %}
+                    </tr>
+                    {% endfor %}
 
-        </tbody>
-    </table>
-    <br><br>
-    {% if users %}
+                </tbody>
+            </table>
+            <br><br>
+            {% if users %}
 
-    <a href="{{url_for('profile.display_users')}}"><button type="button" class="btn btn-primary">Users-List</button></a>
+            <a href="{{url_for('profile.display_users')}}"><button type="button"
+                    class="btn btn-primary">Users-List</button></a>
 
-   </div></div>
-   {% else %}
-   <P>No Blocked Users, back to<a href="{{url_for('profile.display_users')}}"> Users-List</a> </P>
-  
-   {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <P>No Blocked Users, back to<a href="{{url_for('profile.display_users')}}"> Users-List</a> </P>
+
+    {% endif %}
+
+
+    {% else %}
+    <br>
+    <div class="alert alert-warning" role="alert">
+        You're not allowed to see this! back to your profile?<a href="{{url_for('profile.profile')}}"> Your-Profile </a>
+    </div>
+    {% endif %}
 </center>
+
 <br><br>
 {% endblock %}

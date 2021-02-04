@@ -15,9 +15,9 @@ home_bp = Blueprint('home', __name__)
 
 
 @home_bp.route('/home', methods=['POST', 'GET'])
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def home():
 
     user = User.objects()
@@ -106,9 +106,9 @@ def edit_item(user_id,item_id):
 
     
 @home_bp.route('/user/<user_id>/delete_item/<item_id>', methods=['GET', 'POST'])
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def delete_item(user_id ,item_id):
 
     item = Item.objects(id = item_id).first() 
@@ -125,9 +125,9 @@ def delete_item(user_id ,item_id):
 
 
 @home_bp.route('/sort-item/date', methods=['GET', 'POST'])
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def sort_date_items():
 
     items = Item.objects.order_by('-date')
@@ -136,9 +136,9 @@ def sort_date_items():
 
 
 @home_bp.route('/sort-item/price', methods=['GET', 'POST'])
-# @login_required
-# @disable_user
-# @maintenance
+@login_required
+@disable_user
+@maintenance
 def sort_price_items():
 
     items = Item.objects.order_by('-price')

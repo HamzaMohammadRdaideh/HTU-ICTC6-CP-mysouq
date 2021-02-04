@@ -11,6 +11,8 @@
 
 
 <center>
+  {% if session['user']['role'] == 1 %}
+
   <div>
     <div class="col-lg-4 col-md-6 col-sm-12">
       <h2>
@@ -47,6 +49,15 @@
 
     </div>
   </div>
+
+
+  {% else %}
+  <br>
+  <div class="alert alert-warning" role="alert">
+    You're not allowed to see this! back to your profile?<a href="{{url_for('profile.profile')}}"> Your-Profile </a>
+  </div>
+  {% endif %}
+
 </center>
 
 {% endblock %}

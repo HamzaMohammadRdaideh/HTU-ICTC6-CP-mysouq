@@ -8,9 +8,9 @@ from .user import disable_user , login_required , maintenance
 notifications_bp = Blueprint('notifications', __name__)
 
 @notifications_bp.route('/notification/view_buy_request', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def view_buy_request():
 
     current_user = User.objects(id = session['user']['id']).first()
@@ -25,9 +25,9 @@ def view_buy_request():
 
 
 @notifications_bp.route('/notification/<item_id>/approve_buy_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def approve_buy_request(item_id,request_id):
 
     item = Item.objects(id = item_id).first()
@@ -46,9 +46,9 @@ def approve_buy_request(item_id,request_id):
 
 
 @notifications_bp.route('/notification/<item_id>/decline_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def decline_request(item_id,request_id):
 
    
@@ -66,9 +66,9 @@ def decline_request(item_id,request_id):
 
 
 @notifications_bp.route('/upgrade_request', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def upgrade_request():
 
     upgrade_request = UpgradeRequest(user = session['user']['id'], status = "Pending")
@@ -82,9 +82,9 @@ def upgrade_request():
 
 
 @notifications_bp.route('/review_upgrade_requests', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def review_upgrade_requests():
 
     users = User.objects()
@@ -98,9 +98,9 @@ def review_upgrade_requests():
 
 
 @notifications_bp.route('/approve_upgrade_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def approve_upgrade_request(request_id):
 
     request = UpgradeRequest.objects(id = request_id).first()
@@ -116,9 +116,9 @@ def approve_upgrade_request(request_id):
 
 
 @notifications_bp.route('/decline_upgrade_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def decline_upgrade_request(request_id):
 
     request = UpgradeRequest.objects(id = request_id).first()
